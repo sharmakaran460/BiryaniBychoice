@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="400sp"
+    android:layout_height="200sp"
+    android:id="@+id/combocard"
+    android:layout_marginLeft="4sp"
+    android:layout_marginTop="5sp"
+    android:elevation="4sp"
+    app:cardCornerRadius="20sp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/textlayout">
+        <ImageView
+            android:layout_width="200sp"
+            android:layout_height="match_parent"
+            android:background="@drawable/otplayout"
+            android:id="@+id/comboimage" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/raleway_bold"
+                        android:layout_marginLeft="6sp"
+                        android:textSize="20sp"
+                        android:hint="combo name"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="10sp"
+                        android:id="@+id/comboname"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7sp"
+                        android:hint="Price"
+                        android:textSize="15sp"
+                        android:drawableLeft="@drawable/rupeeindian"
+                        android:drawablePadding="10sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_weight="0"
+                        android:layout_gravity="end"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="2sp"
+                        android:textAlignment="textEnd"
+                        android:id="@+id/Cprice"
+                        android:padding="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Description"
+                        android:textStyle="italic"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="2sp"
+                        android:layout_weight="1"
+                        android:id="@+id/Cdescription"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_background"
+                        android:text="Add"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

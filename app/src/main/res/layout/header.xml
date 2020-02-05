@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/header"
+    android:padding="16sp">
+    <ImageView
+        android:id="@+id/header_img"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_marginTop="25sp"
+        android:layout_marginLeft="15sp"
+        android:background="@drawable/header1"/>
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wellcome Sherry"
+
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="www.lassezbiryani.com"
+        android:id="@+id/desc"
+        android:layout_below="@+id/header_title"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginLeft="10sp"
+        android:fontFamily="casual"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>

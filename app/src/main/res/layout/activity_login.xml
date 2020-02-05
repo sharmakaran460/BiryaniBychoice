@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:background="#E09D2A"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="10sp">
+        <EditText
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/white"
+            android:hint="email or phone"
+            android:drawableRight="@drawable/ic_call_black_24dp"/>
+        <EditText
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/white"
+            android:hint="password"
+            android:drawableRight="@drawable/ic_lock_black_24dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:layout_gravity="center"
+            android:text="Login"
+            android:background="@drawable/btn_background"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100sp">
+        <ImageView
+            android:layout_width="150sp"
+            android:layout_height="150sp"
+            android:padding="10sp" />
+    </LinearLayout>
+
+</RelativeLayout>
