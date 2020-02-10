@@ -28,7 +28,16 @@
                 app:titleTextColor="#222222"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 android:background="@color/colorPrimaryDark"
-                />
+                >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:drawablePadding="2sp"
+                android:hint="Your location"
+                android:id="@+id/locationText"/>
+            </androidx.appcompat.widget.Toolbar>
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab"
                 android:layout_width="match_parent"

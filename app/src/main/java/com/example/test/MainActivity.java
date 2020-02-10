@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tabbar;
     private ViewPager viewPager;
     private Toolbar toolbar;
+    private EditText locText;
 
     Location loc;
     private DrawerLayout drawerLayout;
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
-
+        locText =findViewById(R.id.locationText);
         client = LocationServices.getFusedLocationProviderClient(this);
 
         //requestPermission();
@@ -150,6 +152,7 @@ public void getaddress(){
             addressFragment.add(address.getAddressLine(i));
         }
         System.out.println("ye address aa rahae hai"+addressFragment);
+        locText.setText(addressFragment.get(0));
         Toast.makeText(this, addressFragment.get(0), Toast.LENGTH_LONG).show();
     }
 }
