@@ -28,10 +28,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
       <ImageView
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="100sp"
             android:id="@+id/background"
-            android:layout_marginLeft="100sp"
             android:background="@color/fbutton_color_transparent"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,10 +46,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/raleway_bold"
                     android:layout_gravity="center"
                     android:layout_marginLeft="6sp"
                     android:hint="Book Title"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@android:color/white"
                     android:textSize="15sp"
                     android:layout_weight="1"
                     android:padding="10sp"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7sp"
                     android:hint="Book Price"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@android:color/white"
                     android:layout_weight="0"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -72,7 +72,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="2sp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -80,7 +81,8 @@
                     android:hint="Book Author"
                     android:layout_marginTop="5sp"
                     android:textStyle="italic"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:paddingBottom="1sp"
+                    android:textColor="@android:color/white"
                     android:textSize="15sp"
                     android:layout_weight="1"
                     android:layout_marginLeft="5sp"
@@ -91,6 +93,7 @@
                     android:background="@drawable/btn_background"
                     android:textColor="@color/toolbarColor"
                     android:text="Add"
+                    android:fontFamily="@font/railway_regular"
                     android:id="@+id/additem"/>
             </LinearLayout>
         </LinearLayout>

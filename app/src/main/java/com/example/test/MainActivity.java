@@ -1,39 +1,77 @@
 package com.example.test;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.MANAGE_DOCUMENTS;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private FusedLocationProviderClient client;
     private TabLayout tabbar;
     private ViewPager viewPager;
     private Toolbar toolbar;
 
-
+    Location loc;
     private DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.toolbar);
 
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+        //requestPermission();
+
+        requestPerm();
 
 
 
@@ -51,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //For Tab view this View pager can be used
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-       viewPagerAdapter.addfragment(new Tab1(), "Veg");
-      viewPagerAdapter.addfragment(new Tab2(), "Non-Veg");
+        viewPagerAdapter.addfragment(new Tab1(), "Veg");
+        viewPagerAdapter.addfragment(new Tab2(), "Non-Veg");
         viewPagerAdapter.addfragment(new BlankFragment(), "Biryani Combos");
 
         viewPager.setAdapter(viewPagerAdapter);
@@ -61,13 +99,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupToolbar();
 
 
+    }
+    public void requestPerm(){
+        if( ActivityCompat.checkSelfPermission(MainActivity.this,ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ACCESS_FINE_LOCATION},1);
+            Toast.makeText(this, "permission nai hai be", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "permission hai", Toast.LENGTH_SHORT).show();
+            client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                loc =location;
+               if (location!=null){
+                   System.out.println("location mai ye aa raha hai"+ location.toString());
+                   //Toast.makeText(MainActivity.this, loc.toString(), Toast.LENGTH_SHORT).show();
+                   getaddress();
+               }else {
+                   System.out.println("mar ja kutte");
+               }
+                }
+            });
+        }
 
     }
+
+public void getaddress(){
+
+        List<Address> addresses =null;
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+    try {
+        addresses = geocoder.getFromLocation(loc.getLatitude(),loc.getLongitude(),1);
+        System.out.println("ye address mai hai"+addresses);
+    } catch (IOException e) {
+        System.out.println("han service ki exception me ye hai"+addresses);
+        e.printStackTrace();
+    }catch (IllegalArgumentException e){
+        e.printStackTrace();
+        System.out.println("bahi illegal argument fek raha hai");
+    }
+
+
+    if (addresses ==null || addresses.size() == 0){
+        System.out.println("address kahli hia bc");
+    }else {
+        Address address = addresses.get(0);
+
+        ArrayList<String> addressFragment = new ArrayList<>();
+
+        for (int i=0;i<=address.getMaxAddressLineIndex(); i++){
+            addressFragment.add(address.getAddressLine(i));
+        }
+        System.out.println("ye address aa rahae hai"+addressFragment);
+        Toast.makeText(this, addressFragment.get(0), Toast.LENGTH_LONG).show();
+    }
+}
 
 
     public void setupToolbar() {
         drawerLayout = findViewById(R.id.drawer);
-        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
