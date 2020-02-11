@@ -3,17 +3,21 @@ package com.example.test;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.PopupWindowCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -23,13 +27,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private Toolbar toolbar;
     private EditText locText;
+    private ImageButton manageAddress;
 
     Location loc;
     private DrawerLayout drawerLayout;
@@ -67,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        manageAddress =findViewById(R.id.locationButton);
         toolbar = findViewById(R.id.toolbar);
         locText =findViewById(R.id.locationText);
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -74,6 +85,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //requestPermission();
 
         requestPerm();
+
+        manageAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+                dialog.setTitle("Want to change Address");
+                dialog.setMessage("Please select the Manage Address option to add Your address manually");
+                dialog.setPositiveButton("Manage Address", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which ) {
+                        Toast.makeText(MainActivity.this, "Bahi kya jaldi hai kar lenge", Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(MainActivity.this, "pheli fursat me nikal", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }).create();
+                dialog.show();
+            }
+        });
 
 
 
@@ -153,7 +188,7 @@ public void getaddress(){
         }
         System.out.println("ye address aa rahae hai"+addressFragment);
         locText.setText(addressFragment.get(0));
-        Toast.makeText(this, addressFragment.get(0), Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, addressFragment.get(0), Toast.LENGTH_LONG).show();
     }
 }
 
