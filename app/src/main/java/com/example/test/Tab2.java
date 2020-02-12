@@ -79,7 +79,7 @@ public class Tab2 extends Fragment {
             protected Void doInBackground(Void... voids) {
 
                 try {
-                    URL url = new URL("http://192.168.1.6:8080/food/cat/nonveg");
+                    URL url = new URL("http://171.50.163.72:8081/biryani/food/cat/nonveg");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     InputStream stream = connection.getInputStream();

@@ -81,8 +81,13 @@ dial_price = mdaialogue.findViewById(R.id.dialogue_price);
         });
         System.out.println("ye hai desc mai"+ food.get(position).getFoodDes());
 
+try{
+    holder.bookBackground.setImageBitmap(BitmapFactory.decodeByteArray(food.get(position).getImage(),0,food.get(position).getImage().length));
+}catch (Exception e)
+{
+    e.printStackTrace();
+}
 
-        holder.bookBackground.setImageBitmap(BitmapFactory.decodeByteArray(food.get(position).getImage(),0,food.get(position).getImage().length));
         //new DownlordImage(holder.bookBackground).execute(food.get(position).getFood_imag_url());
 
         final CartLitedb cartLitedb= new CartLitedb(view.getContext());

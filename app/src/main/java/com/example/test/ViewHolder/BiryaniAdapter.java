@@ -50,7 +50,10 @@ ArrayList<NonVegBiryani> biryani;
         holder.description.setText(biryani.get(position).getDesc());
         holder.price.setText(String.valueOf(biryani.get(position).getPrice()));
 
-        holder.dishimage.setImageBitmap(BitmapFactory.decodeByteArray(biryani.get(position).getImage(),0,biryani.get(position).getImage().length));
+        try {
+            holder.dishimage.setImageBitmap(BitmapFactory.decodeByteArray(biryani.get(position).getImage(),0,biryani.get(position).getImage().length));
+        }catch (Exception e){}
+
         //new DownlordImage(holder.dishimage).execute(biryani.get(position).getImage_url());
 
         final CartLitedb  cartLitedb = new CartLitedb(view.getContext());

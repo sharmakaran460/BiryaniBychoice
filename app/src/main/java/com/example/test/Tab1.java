@@ -103,7 +103,7 @@ public class Tab1 extends Fragment {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://192.168.1.6:8080/food/cat/veg");
+                    URL url = new URL("http://171.50.163.72:8081/biryani/food/cat/veg");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     InputStream stream = connection.getInputStream();
@@ -122,7 +122,7 @@ public class Tab1 extends Fragment {
                         foodmodel.add(i, food);
 
                 }
-
+                    System.out.println("data ye haii.............................."+foodmodel);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

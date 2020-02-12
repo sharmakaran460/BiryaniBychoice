@@ -84,9 +84,14 @@ public class NonVegBiryani {
 
     public void setImage_url(String image_url) {
         String imageData[] = image_url.split(",");
-        image_url =imageData[1];
-        this.image_url = image_url;
-        setImage(Base64.decode(image_url,Base64.DEFAULT));
+        try {
+            image_url =imageData[1];
+            this.image_url = image_url;
+            setImage(Base64.decode(image_url,Base64.DEFAULT));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

@@ -44,7 +44,11 @@ ArrayList<FoodModel> combos;
         holder.comboname.setText(combos.get(position).getFoodName());
         holder.description.setText(combos.get(position).getFoodCat());
         holder.price.setText(String.valueOf(combos.get(position).getFoodPrice()));
-        holder.comboimage.setImageBitmap(BitmapFactory.decodeByteArray(combos.get(position).getImage(),0,combos.get(position).getImage().length));
+        try {
+            holder.comboimage.setImageBitmap(BitmapFactory.decodeByteArray(combos.get(position).getImage(),0,combos.get(position).getImage().length));
+        }catch (Exception e){
+        }
+
 
         //new DownlordImage(holder.comboimage).execute(combos.get(position).getFood_imag_url());
     }

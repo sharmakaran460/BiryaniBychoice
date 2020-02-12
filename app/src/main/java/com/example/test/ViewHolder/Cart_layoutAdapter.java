@@ -67,7 +67,10 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
 
         holder.itemPrice.setText(String.valueOf(cartModalArrayList.get(position).getCart_item_price()));
 
-        holder.itemimg.setImageBitmap(BitmapFactory.decodeByteArray(cartModalArrayList.get(position).getImage(),0,cartModalArrayList.get(position).getImage().length));
+        try {
+            holder.itemimg.setImageBitmap(BitmapFactory.decodeByteArray(cartModalArrayList.get(position).getImage(),0,cartModalArrayList.get(position).getImage().length));
+        }catch (Exception e){}
+
 
         //new DownlordImage(holder.itemimg).execute(cartModalArrayList.get(position).getCart_item_img_url());
         System.out.println("here is cart"+cartModalArrayList);
