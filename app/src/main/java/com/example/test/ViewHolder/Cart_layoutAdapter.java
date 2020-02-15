@@ -65,7 +65,7 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
         counterClass.setCount(cartModalArrayList.get(position).getQuantity());
 
 
-        holder.itemPrice.setText(String.valueOf(cartModalArrayList.get(position).getCart_item_price()));
+        holder.itemPrice.setText(String.valueOf(cartModalArrayList.get(position).getCart_item_price())+" \u20B9");
 
         try {
             holder.itemimg.setImageBitmap(BitmapFactory.decodeByteArray(cartModalArrayList.get(position).getImage(),0,cartModalArrayList.get(position).getImage().length));

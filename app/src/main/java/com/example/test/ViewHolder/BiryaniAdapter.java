@@ -48,7 +48,7 @@ ArrayList<NonVegBiryani> biryani;
 
          holder.dishName.setText(biryani.get(position).getDish_name());
         holder.description.setText(biryani.get(position).getDesc());
-        holder.price.setText(String.valueOf(biryani.get(position).getPrice()));
+        holder.price.setText(String.valueOf(biryani.get(position).getPrice())+" \u20B9");
 
         try {
             holder.dishimage.setImageBitmap(BitmapFactory.decodeByteArray(biryani.get(position).getImage(),0,biryani.get(position).getImage().length));

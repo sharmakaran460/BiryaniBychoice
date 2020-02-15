@@ -43,7 +43,7 @@ ArrayList<FoodModel> combos;
 
         holder.comboname.setText(combos.get(position).getFoodName());
         holder.description.setText(combos.get(position).getFoodCat());
-        holder.price.setText(String.valueOf(combos.get(position).getFoodPrice()));
+        holder.price.setText(String.valueOf(combos.get(position).getFoodPrice())+" \u20B9");
         try {
             holder.comboimage.setImageBitmap(BitmapFactory.decodeByteArray(combos.get(position).getImage(),0,combos.get(position).getImage().length));
         }catch (Exception e){

@@ -68,7 +68,7 @@ dial_price = mdaialogue.findViewById(R.id.dialogue_price);
         
         holder.bookName.setText(food.get(position).getFoodName());
         holder.bookAuthor.setText(food.get(position).getFoodCat());
-        holder.bookPrice.setText(String.valueOf(food.get(position).getFoodPrice()));
+        holder.bookPrice.setText(String.valueOf(food.get(position).getFoodPrice())+" \u20B9");
         holder.desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
