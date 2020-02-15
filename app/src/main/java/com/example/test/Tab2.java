@@ -45,8 +45,6 @@ public class Tab2 extends Fragment {
     ArrayList<NonVegBiryani> biryaniList = new ArrayList<>();
 
 
-
-
     public Tab2() {
         // Required empty public constructor
     }
@@ -79,7 +77,7 @@ public class Tab2 extends Fragment {
             protected Void doInBackground(Void... voids) {
 
                 try {
-                    URL url = new URL("http://171.50.163.72:8081/biryani/food/cat/nonveg");
+                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/nonveg");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     InputStream stream = connection.getInputStream();

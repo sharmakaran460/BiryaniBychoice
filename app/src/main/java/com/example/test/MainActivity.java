@@ -1,47 +1,37 @@
 package com.example.test;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.widget.PopupWindowCompat;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.view.WindowManager;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
-import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,9 +44,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.MANAGE_DOCUMENTS;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -83,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         client = LocationServices.getFusedLocationProviderClient(this);
 
         //requestPermission();
+                requestPerm();
 
-        requestPerm();
 
         manageAddress.setOnClickListener(new View.OnClickListener() {
             @Override

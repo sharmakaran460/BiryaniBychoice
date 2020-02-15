@@ -11,6 +11,7 @@ public class NonVegBiryani {
      private int id;
     private String dish_name;
     private String desc;
+    private String dish_cat;
     private String image_url;
     byte[] image;
     private int price;

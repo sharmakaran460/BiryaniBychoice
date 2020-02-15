@@ -47,18 +47,16 @@ import java.util.zip.Inflater;
  * A simple {@link Fragment} subclass.
  */
 public class Tab1 extends Fragment {
-     View view;
-  private  ArrayList<FoodModel> foodmodel = new ArrayList<>();
-    String data;
-    ArrayList<Book> book1;
-    ProgressDialog progressDialog;
+        View view;
+  static ArrayList<FoodModel> foodmodel = new ArrayList<>();
 
+    private ProgressDialog progressDialog;
+
+    ArrayList<Book> book1;
+
+        String urls;
     public Tab1() {
         // Required empty public constructor
-    }
-    public Tab1(ArrayList<Book> book2)
-    {
-        this.book1=book2;
     }
 
 
@@ -69,7 +67,7 @@ public class Tab1 extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.layout);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new VIewAdapter(getContext(),foodmodel));
 
@@ -79,10 +77,11 @@ public class Tab1 extends Fragment {
     @SuppressLint("StaticFieldLeak")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
-        new  AsyncTask<Void, Void, Void>() {
-
+        new AsyncTask<Void,Void,Void>(){
+            String data;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -102,8 +101,9 @@ public class Tab1 extends Fragment {
 
             @Override
             protected Void doInBackground(Void... voids) {
+
                 try {
-                    URL url = new URL("http://171.50.163.72:8081/biryani/food/cat/veg");
+                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/veg");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     InputStream stream = connection.getInputStream();
@@ -121,7 +121,7 @@ public class Tab1 extends Fragment {
                         food.setFood_imag_url(object.getString("food_image_blob"));
                         foodmodel.add(i, food);
 
-                }
+                    }
                     System.out.println("data ye haii.............................."+foodmodel);
 
                 } catch (JSONException e) {
@@ -143,13 +143,13 @@ public class Tab1 extends Fragment {
                     progressDialog.dismiss();
                 }
                 RecyclerView recyclerView = view.findViewById(R.id.layout);
-                recyclerView.setHasFixedSize(true);
+                recyclerView.hasFixedSize();
                 recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
                 recyclerView.setAdapter(new VIewAdapter(getContext(),foodmodel));
             }
+
         }.execute();
 
     }
 }
-
 

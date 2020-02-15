@@ -129,43 +129,4 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
         }
     }
 
-    public class DownlordImage extends AsyncTask<String,Void, Bitmap> {
-        ImageView img;
-
-        public DownlordImage(ImageView img) {
-            this.img = img;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            System.out.println("i am in  pic");
-
-            Bitmap bitmap =null;
-            try {
-                String urlLoad= urls[0];
-                System.out.println("i am in try pic");
-                URL url=new URL(urlLoad);
-                InputStream stream=url.openStream();
-                bitmap= BitmapFactory.decodeStream(stream);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            img.setImageBitmap(bitmap);
-        }
-    }
 }

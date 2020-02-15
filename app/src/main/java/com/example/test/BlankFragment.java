@@ -72,7 +72,7 @@ public class BlankFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://171.50.163.72:8081/biryani/food/cat/egg");
+                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/egg");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     InputStream stream = connection.getInputStream();

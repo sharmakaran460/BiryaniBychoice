@@ -7,7 +7,16 @@ public class Book {
     String bookName;
     String bookAuthor;
     int bookPrice;
+     static int  staticip;
     ArrayList<Book> booklist;
+
+    public int getStaticip() {
+        return staticip;
+    }
+
+    public void setStaticip(int staticip) {
+        this.staticip = staticip;
+    }
 
     public ArrayList<Book> getBooklist() {
         return booklist;

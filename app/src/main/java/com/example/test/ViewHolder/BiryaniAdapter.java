@@ -54,7 +54,6 @@ ArrayList<NonVegBiryani> biryani;
             holder.dishimage.setImageBitmap(BitmapFactory.decodeByteArray(biryani.get(position).getImage(),0,biryani.get(position).getImage().length));
         }catch (Exception e){}
 
-        //new DownlordImage(holder.dishimage).execute(biryani.get(position).getImage_url());
 
         final CartLitedb  cartLitedb = new CartLitedb(view.getContext());
 
@@ -94,38 +93,5 @@ holder.additem.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    }
-
-    public class DownlordImage extends AsyncTask<String,Void, Bitmap> {
-        ImageView img;
-
-        public DownlordImage(ImageView img) {
-            this.img = img;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String urlLoad= urls[0];
-            Bitmap bitmap =null;
-            try {
-                URL url=new URL(urlLoad);
-                InputStream stream=url.openStream();
-                bitmap= BitmapFactory.decodeStream(stream);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            img.setImageBitmap(bitmap);
-        }
     }
 }

@@ -4,19 +4,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.text.Layout;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.test.Model.FoodModel;
 import com.example.test.R;
 import com.example.test.Sqldirectory.CartLitedb;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,14 +78,13 @@ dial_price = mdaialogue.findViewById(R.id.dialogue_price);
                 dialog.show();
             }
         });
-        System.out.println("ye hai desc mai"+ food.get(position).getFoodDes());
 
-try{
-    holder.bookBackground.setImageBitmap(BitmapFactory.decodeByteArray(food.get(position).getImage(),0,food.get(position).getImage().length));
-}catch (Exception e)
-{
-    e.printStackTrace();
-}
+        try{
+            holder.bookBackground.setImageBitmap(BitmapFactory.decodeByteArray(food.get(position).getImage(),0,food.get(position).getImage().length));
+        }catch (Exception e)
+        {
+             e.printStackTrace();
+        }
 
         //new DownlordImage(holder.bookBackground).execute(food.get(position).getFood_imag_url());
 
@@ -112,9 +110,15 @@ try{
 
     }
 
+
     @Override
     public int getItemCount() {
         return food.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
@@ -135,36 +139,5 @@ try{
 
         }
     }
-    public class DownlordImage extends AsyncTask<String,Void, Bitmap>{
-ImageView img;
 
-        public DownlordImage(ImageView img) {
-            this.img = img;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String urlLoad= urls[0];
-            Bitmap bitmap =null;
-            try {
-                URL url=new URL(urlLoad);
-                InputStream stream=url.openStream();
-                bitmap= BitmapFactory.decodeStream(stream);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            img.setImageBitmap(bitmap);
-        }
-    }
 }
