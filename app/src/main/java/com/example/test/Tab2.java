@@ -51,7 +51,7 @@ import java.util.ArrayList;
 public class Tab2 extends Fragment {
      View view;
     ArrayList<NonVegBiryani> biryaniList = new ArrayList<>();
-
+    final ArrayList<FoodModel> foodModels=new ArrayList<>();
 
     public Tab2() {
         // Required empty public constructor
@@ -63,20 +63,22 @@ public class Tab2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
-
+        RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
+        recyclerView.hasFixedSize();
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(new BiryaniAdapter(foodModels));
 
 
    return view;
     }
 
-    @SuppressLint("StaticFieldLeak")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
         String nonveg="http://61.247.229.49:8082/biryani/food/cat/nonveg";
-        final ArrayList<FoodModel> foodModels=new ArrayList<>();
+
 
         StringRequest request = new StringRequest(Request.Method.GET, nonveg,
                 new Response.Listener<String>() {

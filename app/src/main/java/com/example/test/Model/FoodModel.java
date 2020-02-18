@@ -2,6 +2,8 @@ package com.example.test.Model;
 
 import android.util.Base64;
 
+import java.util.ArrayList;
+
 public class FoodModel {
 
     int foodid;
@@ -11,6 +13,8 @@ public class FoodModel {
     String food_imag_url;
     byte[] image;
     int foodPrice;
+
+    ArrayList<FoodModel> foodModelslist ;
 
     public byte[] getImage() {
         return image;
@@ -30,6 +34,14 @@ public class FoodModel {
         this.foodDes = foodDes;
         this.foodPrice = foodPrice;
         this.food_imag_url = food_imag_url;
+    }
+
+    public ArrayList<FoodModel> getFoodModelslist() {
+        return foodModelslist;
+    }
+
+    public void setFoodModelslist(ArrayList<FoodModel> foodModelslist) {
+        this.foodModelslist = foodModelslist;
     }
 
     public int getFoodid() {

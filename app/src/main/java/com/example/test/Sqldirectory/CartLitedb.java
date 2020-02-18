@@ -17,6 +17,7 @@ public class CartLitedb extends SQLiteOpenHelper {
 
 
     ArrayList<CartModal> cartModalArrayList = new ArrayList<>();
+    ArrayList<CartModal> cartModalArrayListCard = new ArrayList<>();
 
     public static final String database ="cart_db";
     int x;
@@ -42,6 +43,7 @@ public class CartLitedb extends SQLiteOpenHelper {
 database.insert(CartModal.tablename,null,values);
 database.close();
     }
+
 
 
     public List<CartModal> getdata(){

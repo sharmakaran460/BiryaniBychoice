@@ -45,6 +45,7 @@ import java.util.List;
 public class BlankFragment extends Fragment {
 
     View view;
+    final ArrayList<FoodModel> foodModels=new ArrayList<>();
     ArrayList<FoodModel> combolist = new ArrayList<>();
 
 
@@ -65,7 +66,7 @@ public class BlankFragment extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new ComboAdapter(combolist));
+        recyclerView.setAdapter(new ComboAdapter(foodModels));
 
 
         return view;
@@ -76,7 +77,7 @@ public class BlankFragment extends Fragment {
         super.onCreate(savedInstanceState);
         String eggurl="http://61.247.229.49:8082/biryani/food/cat/egg";
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
-       final ArrayList<FoodModel> foodModels=new ArrayList<>();
+
         StringRequest request = new StringRequest(Request.Method.GET, eggurl,
                 new Response.Listener<String>() {
                     @Override

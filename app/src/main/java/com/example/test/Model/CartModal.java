@@ -6,13 +6,17 @@ public class CartModal {
 
    private int cart_item_id;
     private String cart_item_name;
+    private  String cart_item_desc;
+    private String cart_item_cat;
      private String cart_item_img_url;
      private byte[] image;
     private int cart_quantity;
     private int cart_item_price;
 
     public static final String tablename="cart";
+    public static final String tablenamecard="ards";
     public  static final   String column_id="_id";
+    public  static final  String column_desc="desc";
    public static final String column_name ="name";
    public static final String column_price ="price";
     public static final String column_img_url="image_url";
@@ -24,6 +28,8 @@ public class CartModal {
             + column_id + " Integer primary key AUTOINCREMENT,"+
             column_name +" text ,"+ column_quantity +" Integer ,"+
             column_price +" Integer ,"+column_cat+" text ,"+ column_img_url +" BLOB )";
+
+
 
     public CartModal() {
     }
@@ -38,6 +44,22 @@ public class CartModal {
             this.cart_quantity =quantity;
 
 
+    }
+
+    public String getCart_item_cat() {
+        return cart_item_cat;
+    }
+
+    public void setCart_item_cat(String cart_item_cat) {
+        this.cart_item_cat = cart_item_cat;
+    }
+
+    public String getCart_item_desc() {
+        return cart_item_desc;
+    }
+
+    public void setCart_item_desc(String cart_item_desc) {
+        this.cart_item_desc = cart_item_desc;
     }
 
     public byte[] getImage() {
