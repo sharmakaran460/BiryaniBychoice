@@ -33,7 +33,7 @@ import java.util.ArrayList;
  */
 public class Tab1 extends Fragment {
         View view;
-    static  String Url ="";
+    static  String   Url ="http://61.247.229.49:8082/biryani/food/cat/veg/";
   static ArrayList<FoodModel> foodmodel = new ArrayList<>();
 
   Context c;
@@ -66,9 +66,9 @@ public class Tab1 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Url ="http://61.247.229.49:8082/biryani/food/cat/veg/";
 
-       getData.getalldata(Url,getActivity());
+
+       getData.getalldata(Url,Tab1.this.getContext());
 
         foodmodel=getData.getFoodModels();
         System.out.println("ye on crerate me food moel hai...................................................."+foodmodel);
