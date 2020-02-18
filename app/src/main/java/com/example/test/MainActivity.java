@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addfragment(new Tab1(), "Veg");
         viewPagerAdapter.addfragment(new Tab2(), "Non-Veg");
-        viewPagerAdapter.addfragment(new BlankFragment(), "Biryani Combos");
+        viewPagerAdapter.addfragment(new BlankFragment(), "Eggs");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabbar.setupWithViewPager(viewPager);

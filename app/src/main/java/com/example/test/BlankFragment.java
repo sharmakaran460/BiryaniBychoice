@@ -14,6 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.test.Model.FoodModel;
 import com.example.test.ViewHolder.ComboAdapter;
 
@@ -30,6 +36,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -67,50 +74,44 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new AsyncTask<Void, Void, Void>() {
-            String data;
+        String eggurl="http://61.247.229.49:8082/biryani/food/cat/egg";
+        RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
+       final ArrayList<FoodModel> foodModels=new ArrayList<>();
+        StringRequest request = new StringRequest(Request.Method.GET, eggurl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array =new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                FoodModel foodItem = new FoodModel();
+                                JSONObject object = array.getJSONObject(i);
+                                foodItem.setFoodName(object.getString("food_name"));
+                                foodItem.setFoodCat(object.getString("food_cat"));
+                                foodItem.setFoodDes(object.getString("food_desc"));
+                                foodItem.setFoodPrice(object.getInt("food_price"));
+                                foodItem.setFood_imag_url(object.getString("food_image_blob"));
+                                foodModels.add(i,foodItem);
+                            }
+                            System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
+                            RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
+                            recyclerView.hasFixedSize();
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new ComboAdapter(foodModels));
+
+                        }catch (Exception e)
+                        {
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            protected Void doInBackground(Void... voids) {
-                try {
-                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/egg");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    InputStream stream = connection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-                    data  = reader.readLine();
-                    JSONArray array = new JSONArray(data);
-                    for (int i=0;i<array.length();i++){
-                        FoodModel foodModel = new FoodModel();
-                        JSONObject object = (JSONObject) array.get(i);
-                        foodModel.setFoodName(object.getString("food_name"));
-                        foodModel.setFoodCat(object.getString("food_cat"));
-                        foodModel.setFoodPrice(object.getInt("food_price"));
-                        foodModel.setFood_imag_url(object.getString("food_image_blob"));
-                        combolist.add(foodModel);
-
-                }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                recyclerView.setAdapter(new ComboAdapter(combolist));
+            public void onErrorResponse(VolleyError error) {
 
             }
-        }.execute();
+        });
+        requestQueue.add(request);
+
     }
 }
