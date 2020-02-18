@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.test.Model.FoodModel;
 import com.example.test.Model.NonVegBiryani;
 import com.example.test.OrderCart.Cart;
 import com.example.test.R;
@@ -27,10 +28,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class BiryaniAdapter extends RecyclerView.Adapter<BiryaniAdapter.ViewHolder> {
-ArrayList<NonVegBiryani> biryani;
+ArrayList<FoodModel> biryani;
     View view;
 
-    public BiryaniAdapter(ArrayList<NonVegBiryani> biryaniList) {
+    public BiryaniAdapter(ArrayList<FoodModel> biryaniList) {
 
         biryani = biryaniList;
     }
@@ -46,9 +47,9 @@ ArrayList<NonVegBiryani> biryani;
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-         holder.dishName.setText(biryani.get(position).getDish_name());
-        holder.description.setText(biryani.get(position).getDesc());
-        holder.price.setText(String.valueOf(biryani.get(position).getPrice())+" \u20B9");
+         holder.dishName.setText(biryani.get(position).getFoodName());
+        holder.description.setText(biryani.get(position).getFoodCat());
+        holder.price.setText(String.valueOf(biryani.get(position).getFoodPrice())+" \u20B9");
 
         try {
             holder.dishimage.setImageBitmap(BitmapFactory.decodeByteArray(biryani.get(position).getImage(),0,biryani.get(position).getImage().length));
@@ -63,9 +64,9 @@ holder.additem.setOnClickListener(new View.OnClickListener() {
         holder.additem.setEnabled(false);
         holder.additem.setText("Added");
 
-        cartLitedb.insertdata(biryani.get(position).getDish_name(),
-                biryani.get(position).getPrice()
-                ,1,null,biryani.get(position).getImage_url());
+        cartLitedb.insertdata(biryani.get(position).getFoodName(),
+                biryani.get(position).getFoodPrice()
+                ,1,null,biryani.get(position).getFood_imag_url());
 
 
             }

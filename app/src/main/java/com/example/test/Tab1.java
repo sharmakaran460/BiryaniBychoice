@@ -20,8 +20,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.test.Model.Book;
 import com.example.test.Model.FoodModel;
+import com.example.test.ViewHolder.ComboAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -71,84 +78,58 @@ public class Tab1 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new VIewAdapter(getContext(),foodmodel));
 
+
+
+
+
          return view;
 
     }
     @SuppressLint("StaticFieldLeak")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
         super.onCreate(savedInstanceState);
+        String veggurl="http://61.247.229.49:8082/biryani/food/cat/veg";
+        final ArrayList<FoodModel> foodModels=new ArrayList<>();
 
-        new AsyncTask<Void,Void,Void>(){
-            String data;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("please wait.......");
-                progressDialog.setIndeterminate(false);
-                progressDialog.setCancelable(true);
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressDialog.show();
-            }
+        StringRequest request = new StringRequest(Request.Method.GET, veggurl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array =new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                FoodModel foodItem = new FoodModel();
+                                JSONObject object = array.getJSONObject(i);
+                                foodItem.setFoodName(object.getString("food_name"));
+                                foodItem.setFoodCat(object.getString("food_cat"));
+                                foodItem.setFoodDes(object.getString("food_desc"));
+                                foodItem.setFoodPrice(object.getInt("food_price"));
+                                foodItem.setFood_imag_url(object.getString("food_image_blob"));
+                                foodModels.add(i,foodItem);
+                            }
+                            System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
+                            RecyclerView recyclerView= view.findViewById(R.id.layout);
+                            recyclerView.hasFixedSize();
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new VIewAdapter(getContext(),foodModels));
 
-            @Override
-            protected void onProgressUpdate(Void... values) {
-                super.onProgressUpdate(values);
-                progressDialog.isShowing();
-            }
+                        }catch (Exception e)
+                        {
 
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                try {
-                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/veg");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    InputStream stream = connection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-                    data = reader.readLine();
-                    JSONArray array = new JSONArray(data);
-                    for (int i = 0; i < array.length(); i++) {
-                        FoodModel food = new FoodModel();
-                        JSONObject object = (JSONObject) array.get(i);
-                        food.setFoodName(object.getString("food_name"));
-                        food.setFoodCat(object.getString("food_cat"));
-                        food.setFoodPrice(object.getInt("food_price"));
-                        food.setFoodDes(object.getString("food_desc"));
-                        food.setFood_imag_url(object.getString("food_image_blob"));
-                        foodmodel.add(i, food);
+                        }
 
                     }
-                    System.out.println("data ye haii.............................."+foodmodel);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
+                }, new Response.ErrorListener() {
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                if (progressDialog.isShowing()){
-                    progressDialog.dismiss();
-                }
-                RecyclerView recyclerView = view.findViewById(R.id.layout);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                recyclerView.setAdapter(new VIewAdapter(getContext(),foodmodel));
-            }
+            public void onErrorResponse(VolleyError error) {
 
-        }.execute();
+            }
+        });
+        requestQueue.add(request);
+
 
     }
 }

@@ -17,9 +17,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.test.Model.Book;
+import com.example.test.Model.FoodModel;
 import com.example.test.Model.NonVegBiryani;
 import com.example.test.ViewHolder.BiryaniAdapter;
+import com.example.test.ViewHolder.ComboAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
 
 import org.json.JSONArray;
@@ -57,11 +65,6 @@ public class Tab2 extends Fragment {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
 
 
-        RecyclerView recyclerView = view.findViewById(R.id.biryanirecycler);
-        recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        recyclerView.setAdapter(new BiryaniAdapter(biryaniList));
 
    return view;
     }
@@ -70,57 +73,46 @@ public class Tab2 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new AsyncTask<Void, Void, Void>() {
+        RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
-            String data;
+        String nonveg="http://61.247.229.49:8082/biryani/food/cat/nonveg";
+        final ArrayList<FoodModel> foodModels=new ArrayList<>();
+
+        StringRequest request = new StringRequest(Request.Method.GET, nonveg,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array =new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                FoodModel foodItem = new FoodModel();
+                                JSONObject object = array.getJSONObject(i);
+                                foodItem.setFoodName(object.getString("food_name"));
+                                foodItem.setFoodCat(object.getString("food_cat"));
+                                foodItem.setFoodDes(object.getString("food_desc"));
+                                foodItem.setFoodPrice(object.getInt("food_price"));
+                                foodItem.setFood_imag_url(object.getString("food_image_blob"));
+                                foodModels.add(i,foodItem);
+                            }
+                            System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
+                            RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
+                            recyclerView.hasFixedSize();
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new BiryaniAdapter(foodModels));
+
+                        }catch (Exception e)
+                        {
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            protected Void doInBackground(Void... voids) {
-
-                try {
-                    URL url = new URL("http://61.247.229.49:8082/biryani/food/cat/nonveg");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    InputStream stream = connection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-                    data = reader.readLine();
-                    JSONArray array = new JSONArray(data);
-                    for (int i = 0; i < array.length(); i++) {
-                        NonVegBiryani biryani = new NonVegBiryani();
-                        JSONObject object = (JSONObject) array.get(i);
-                        biryani.setDish_name(object.getString("food_name"));
-                        biryani.setDesc(object.getString("food_cat"));
-                        biryani.setPrice(object.getInt("food_price"));
-                        biryani.setImage_url(object.getString("food_image_blob"));
-                        biryaniList.add(i, biryani);
-                        biryani.setBiryanilists(biryaniList);
-
-                }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                RecyclerView recyclerView = view.findViewById(R.id.biryanirecycler);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-                recyclerView.setAdapter(new BiryaniAdapter(biryaniList));
-
+            public void onErrorResponse(VolleyError error) {
 
             }
-        }.execute();
+        });
+        requestQueue.add(request);
 
     }
 }
