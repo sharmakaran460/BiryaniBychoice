@@ -3,6 +3,7 @@ package com.example.test;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.test.OrderCart.Myorders;
 
 public class Customer_Profile extends AppCompatActivity {
 TextView name ,review ,pohto;
@@ -30,6 +33,14 @@ Toolbar toolbar;
         edit = findViewById(R.id.editProfile);
         profilePic = findViewById(R.id.prodilepic);
         toolbar = findViewById(R.id.profiletoolbar);
+
+        myorders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(Customer_Profile.this, Myorders.class));
+
+            }
+        });
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);

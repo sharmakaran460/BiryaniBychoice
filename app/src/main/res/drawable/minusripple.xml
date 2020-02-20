@@ -3,7 +3,8 @@
     android:color="@color/colorPrimaryDark">
     <item>
 
-        <inset android:drawable="@drawable/minus" android:visible="true"/>
+
+        <inset android:drawable="@drawable/ic_indeterminate_check_box_black_24dp" android:visible="true"/>
     </item>
 
 </ripple>

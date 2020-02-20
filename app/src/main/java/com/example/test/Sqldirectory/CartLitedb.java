@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.android.volley.toolbox.StringRequest;
 import com.example.test.Model.CartModal;
 
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class CartLitedb extends SQLiteOpenHelper {
     ArrayList<CartModal> cartModalArrayList = new ArrayList<>();
     ArrayList<CartModal> cartModalArrayListCard = new ArrayList<>();
 
+
     public static final String database ="cart_db";
+
     int x;
 
     public CartLitedb(@Nullable Context context) {
@@ -29,7 +32,12 @@ public class CartLitedb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CartModal.create_table);
+
+
     }
+
+
+
 
     public void insertdata(String name, int price,int quantity,String cat, String url){
         SQLiteDatabase database=getWritableDatabase();

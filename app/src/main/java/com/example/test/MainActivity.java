@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dialog.setPositiveButton("Manage Address", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which ) {
-                        Toast.makeText(MainActivity.this, "Bahi kya jaldi hai kar lenge", Toast.LENGTH_SHORT).show();
+
                     }
                 }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Toast.makeText(MainActivity.this, "pheli fursat me nikal", Toast.LENGTH_SHORT).show();
+
                         dialog.dismiss();
                     }
                 }).create();

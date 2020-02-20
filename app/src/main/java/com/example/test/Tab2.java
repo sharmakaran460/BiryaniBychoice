@@ -77,7 +77,7 @@ public class Tab2 extends Fragment {
         super.onCreate(savedInstanceState);
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
-        String nonveg="http://61.247.229.49:8082/biryani/food/cat/nonveg";
+        String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/nonveg";
 
 
         StringRequest request = new StringRequest(Request.Method.GET, nonveg,

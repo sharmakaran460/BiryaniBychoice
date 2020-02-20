@@ -67,9 +67,6 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
 
         holder.itemPrice.setText(String.valueOf(cartModalArrayList.get(position).getCart_item_price())+" \u20B9");
 
-        try {
-            holder.itemimg.setImageBitmap(BitmapFactory.decodeByteArray(cartModalArrayList.get(position).getImage(),0,cartModalArrayList.get(position).getImage().length));
-        }catch (Exception e){}
 
 
         //new DownlordImage(holder.itemimg).execute(cartModalArrayList.get(position).getCart_item_img_url());
@@ -114,13 +111,13 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
 
     public class CartViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView itemimg;
+
         TextView itemName ,itemquantity ,itemPrice;
         ImageButton btn_minus,btn_pluss;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemimg = itemView.findViewById(R.id.cart_img);
+
             itemName = itemView.findViewById(R.id.cart_name);
             itemquantity = itemView.findViewById(R.id.cart_quantity);
             itemPrice = itemView.findViewById(R.id.cart_price);

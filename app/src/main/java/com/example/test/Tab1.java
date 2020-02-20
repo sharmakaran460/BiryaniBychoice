@@ -33,7 +33,7 @@ import java.util.ArrayList;
  */
 public class Tab1 extends Fragment {
         View view;
-    static  String   Url ="http://61.247.229.49:8082/biryani/food/cat/veg/";
+    static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/cat/veg/";
   static ArrayList<FoodModel> foodmodel = new ArrayList<>();
 
   Context c;

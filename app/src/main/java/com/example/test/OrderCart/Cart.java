@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,6 +30,8 @@ public class Cart extends AppCompatActivity {
 
     Toolbar toolbar;
     Button placeorder;
+    RelativeLayout relativeLayout;
+    TextView remove_donation;
 
 
     @Override
@@ -39,6 +43,16 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         toolbar = findViewById(R.id.cartToolbar);
         placeorder = findViewById(R.id.placeorder);
+        relativeLayout=findViewById(R.id.donation_layout_id);
+        remove_donation=findViewById(R.id.remove_donation);
+
+        remove_donation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeLayout.setVisibility(View.GONE);
+            }
+        });
+
 
         setSupportActionBar(toolbar);
 //for toolbar setup

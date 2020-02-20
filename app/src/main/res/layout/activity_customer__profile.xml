@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/profiletoolbar"
         style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:background="@color/toolbarColor"/>
+        android:background="@color/colorPrimaryDark"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,6 +63,7 @@
                android:id="@+id/btn_myOrders"
                android:textColor="@android:color/white"
                android:fontFamily="@font/raleway_bold"
+               android:padding="7sp"
                android:background="@drawable/mordersprofilebtn"
                android:text="My Orders" android:layout_gravity="end"/>
         </LinearLayout>

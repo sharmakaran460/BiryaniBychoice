@@ -75,7 +75,7 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String eggurl="http://61.247.229.49:8082/biryani/food/cat/egg";
+        String eggurl="http://61.247.229.49:8082/biryaniweb/food/cat/egg";
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
         StringRequest request = new StringRequest(Request.Method.GET, eggurl,

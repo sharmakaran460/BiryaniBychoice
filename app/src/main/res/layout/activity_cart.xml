@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:id="@+id/cartToolbar"
-            android:background="@color/toolbarColor"/>
+            android:background="@color/colorPrimaryDark"/>
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,17 +37,147 @@
                     android:layout_weight="1"
                     android:layout_column="1"
                     android:textSize="20sp"
-                    android:text="ORDERS"/>
+                    android:text="Your Order"/>
 
             </TableRow>
 
         </TableLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Items"
+                android:textSize="15sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textSize="15sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Price"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5sp"/>
+
+        </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="400sp"
+        android:layout_height="200sp"
         android:id="@+id/cartview"
         android:layout_marginTop="5sp"
         android:padding="10sp"/>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:padding="5sp">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Item(s) Total"
+
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:text="0"
+                   android:id="@+id/items_total"/>
+
+
+           </RelativeLayout>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Taxes and charges"
+
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:text="0"
+                   android:id="@+id/taxes_charges_total"/>
+
+
+           </RelativeLayout>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/donation_layout_id">
+               <TextView
+                   android:layout_width="200sp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/text_foundation"
+
+                   android:text="Donate ₹5 to FirstSecond Child Foundation"
+
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_toRightOf="@+id/text_foundation"
+                   android:id="@+id/remove_donation"
+                   android:layout_marginLeft="5sp"
+                   android:textColor="#FF0000"
+                   android:text="remove"
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:text=" ₹5"
+                   android:id="@+id/donation_total"/>
+
+
+           </RelativeLayout>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+
+                   android:text="Grand Total"
+                   android:textSize="20sp"
+                   android:fontFamily="@font/raleway_bold"
+
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:text="0"
+                   android:textSize="20sp"
+                   android:textColor="#39A73C"
+                   android:fontFamily="@font/raleway_bold"
+                   android:id="@+id/grand_total"/>
+
+
+           </RelativeLayout>
+
+       </LinearLayout>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

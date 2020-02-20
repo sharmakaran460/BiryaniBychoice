@@ -2,7 +2,7 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color=" #abebc6 ">
     <item>
-        <inset android:visible="true" android:drawable="@drawable/add"/>
+        <inset android:visible="true" android:drawable="@drawable/ic_add_box_black_24dp"/>
     </item>
 
 </ripple>
