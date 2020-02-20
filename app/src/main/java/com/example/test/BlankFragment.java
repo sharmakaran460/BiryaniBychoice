@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.test.Model.FoodModel;
 import com.example.test.ViewHolder.ComboAdapter;
+import com.example.test.ViewHolder.NewCardAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,9 +67,9 @@ public class BlankFragment extends Fragment {
 
         RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
         recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
-        recyclerView.setAdapter(new ComboAdapter(foodModels));
+        recyclerView.setAdapter(new NewCardAdapter(foodModels));
 
 
         return view;
@@ -77,7 +79,7 @@ public class BlankFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String eggurl="http://61.247.229.49:8082/biryaniweb/food/cat/egg";
+        String eggurl="http://61.247.229.49:8082/biryaniweb/food/cat/eggnon";
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
         StringRequest request = new StringRequest(Request.Method.GET, eggurl,
@@ -99,8 +101,8 @@ public class BlankFragment extends Fragment {
                             System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
                             RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
                             recyclerView.hasFixedSize();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            recyclerView.setAdapter(new ComboAdapter(foodModels));
+                            recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+                            recyclerView.setAdapter(new NewCardAdapter(foodModels));
 
                         }catch (Exception e)
                         {

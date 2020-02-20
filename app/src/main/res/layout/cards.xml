@@ -86,14 +86,51 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="5sp"
                     android:id="@+id/bookAuthor"/>
-                <Button
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_background"
-                    android:textColor="@color/toolbarColor"
-                    android:text="Add"
-                    android:fontFamily="@font/railway_regular"
-                    android:id="@+id/additem"/>
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_background"
+                        android:textColor="@color/toolbarColor"
+                        android:text="Add"
+                        android:fontFamily="@font/railway_regular"
+                        android:id="@+id/additem"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/add_items_layout"
+                        android:layout_centerInParent="true"
+
+
+                        >
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnminus1"
+                            android:layout_gravity="center"
+                            android:background="@drawable/minusripple"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textAlignment="center"
+                            android:id="@+id/cart_quantity1"
+                            android:textSize="15sp"/>
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnplus1"
+                            android:layout_gravity="center"
+                            android:background="@drawable/plusripple"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
    </LinearLayout>

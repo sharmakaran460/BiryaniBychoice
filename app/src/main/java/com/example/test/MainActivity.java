@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         // this is for not showng the status bar above the app
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         tabbar = findViewById(R.id.tab);
@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //For Tab view this View pager can be used
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addfragment(new Tab1(), "Veg");
-        viewPagerAdapter.addfragment(new Tab2(), "Non-Veg");
-        viewPagerAdapter.addfragment(new BlankFragment(), "Eggs");
+        viewPagerAdapter.addfragment(new Tab1(), "All");
+        viewPagerAdapter.addfragment(new Tab2(), "Veg");
+        viewPagerAdapter.addfragment(new BlankFragment(), "Nonveg");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabbar.setupWithViewPager(viewPager);

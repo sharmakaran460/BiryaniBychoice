@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -38,6 +39,7 @@ Context c;
     ArrayList<FoodModel> food;
     Dialog mdaialogue;
     TextView dial_name,dial_author,dial_price;
+
 
 
     public VIewAdapter(Context c, ArrayList<FoodModel> foodModel)
@@ -94,8 +96,7 @@ dial_price = mdaialogue.findViewById(R.id.dialogue_price);
             @Override
             public void onClick(View v) {
 
-                holder.additem.setEnabled(false);
-                holder.additem.setText("Added");
+                holder.additem.setVisibility(View.GONE);
 
                 System.out.println("ye data hai food url mai"+ food.get(position).getFood_imag_url());
 
@@ -126,9 +127,11 @@ dial_price = mdaialogue.findViewById(R.id.dialogue_price);
        final TextView bookName,bookAuthor,bookPrice;
         ImageView bookBackground;
         Button additem,desc;
+        LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            linearLayout=itemView.findViewById(R.id.add_items_layout);
 
             bookName = itemView.findViewById(R.id.bookTitle);
             bookAuthor = itemView.findViewById(R.id.bookAuthor);

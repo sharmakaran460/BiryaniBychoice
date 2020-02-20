@@ -8,12 +8,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.example.test.Model.FoodModel;
 import com.example.test.Model.NonVegBiryani;
 import com.example.test.ViewHolder.BiryaniAdapter;
 import com.example.test.ViewHolder.ComboAdapter;
+import com.example.test.ViewHolder.NewCardAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
 
 import org.json.JSONArray;
@@ -65,8 +68,8 @@ public class Tab2 extends Fragment {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
         RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
         recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new BiryaniAdapter(foodModels));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        recyclerView.setAdapter(new NewCardAdapter(foodModels));
 
 
    return view;
@@ -77,7 +80,7 @@ public class Tab2 extends Fragment {
         super.onCreate(savedInstanceState);
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
-        String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/nonveg";
+        String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/veg";
 
 
         StringRequest request = new StringRequest(Request.Method.GET, nonveg,
@@ -99,8 +102,8 @@ public class Tab2 extends Fragment {
                             System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
                             RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
                             recyclerView.hasFixedSize();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            recyclerView.setAdapter(new BiryaniAdapter(foodModels));
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                            recyclerView.setAdapter(new NewCardAdapter(foodModels));
 
                         }catch (Exception e)
                         {

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.test.BAckgrounddata.GetData;
 import com.example.test.Model.FoodModel;
+import com.example.test.ViewHolder.NewCardAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
 
 import org.json.JSONArray;
@@ -43,7 +45,7 @@ import java.util.ArrayList;
  */
 public class Tab1 extends Fragment {
         View view;
-    static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/cat/veg/";
+    static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
     final ArrayList<FoodModel> foodlists=new ArrayList<>();
 
 
@@ -62,8 +64,8 @@ public class Tab1 extends Fragment {
 
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new VIewAdapter(getContext().getApplicationContext(),foodlists));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        recyclerView.setAdapter(new NewCardAdapter(foodlists));
 
 
         Toast.makeText(getContext().getApplicationContext(), "on crete view", Toast.LENGTH_SHORT).show();
@@ -98,8 +100,8 @@ public class Tab1 extends Fragment {
                     }
                     RecyclerView recyclerView= view.findViewById(R.id.layout);
                     recyclerView.hasFixedSize();
-                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                    recyclerView.setAdapter(new VIewAdapter(getContext().getApplicationContext(),foodlists));
+                    recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+                    recyclerView.setAdapter(new NewCardAdapter(foodlists));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

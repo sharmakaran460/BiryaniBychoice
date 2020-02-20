@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="160sp"
+    android:padding="4sp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="90sp"
+        android:id="@+id/new_c_image"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_c_f_name"
+        android:text="food name"
+        android:textSize="11sp"
+        android:fontFamily="@font/raleway_bold"
+        android:layout_below="@+id/new_c_image"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20sp"
+        android:textSize="8sp"
+        android:id="@+id/new_c_desc"
+        android:layout_below="@+id/new_c_f_name"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_c_desc"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="₹ "
+            android:layout_centerVertical="true"
+            android:id="@+id/new_c_rupees"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/new_c_rupees"
+            android:id="@+id/new_c_price"
+            android:text="200"
+            android:textSize="11sp"
+            android:layout_centerVertical="true"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/new_c_counter_layout"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:padding="4sp"
+
+
+            >
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_c_count_min"
+                android:layout_gravity="center"
+                android:background="@drawable/minusripple"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:id="@+id/new_c_count_num"
+                android:textSize="15sp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_c_count_plus"
+                android:layout_gravity="center"
+                android:background="@drawable/plusripple"/>
+
+        </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/new_c_add_btn"
+                android:background="@drawable/loginbackground"
+                android:text="Add"
+                android:textSize="10sp"
+                android:padding="4sp"
+
+                />
+    </RelativeLayout>
+
+
+</RelativeLayout>
