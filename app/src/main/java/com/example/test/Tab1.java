@@ -20,9 +20,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.test.BAckgrounddata.GetData;
 import com.example.test.Model.FoodModel;
 import com.example.test.ViewHolder.VIewAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,13 +44,12 @@ import java.util.ArrayList;
 public class Tab1 extends Fragment {
         View view;
     static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/cat/veg/";
-  static ArrayList<FoodModel> foodmodel = new ArrayList<>();
+    final ArrayList<FoodModel> foodlists=new ArrayList<>();
 
-  Context c;
+
     public Tab1() {
         // Required empty public constructor
     }
-   private GetData getData = new GetData();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,12 +58,12 @@ public class Tab1 extends Fragment {
 
 
 
-           getData.getalldata(Url, getContext().getApplicationContext());
+
 
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new VIewAdapter(getContext().getApplicationContext(),getData.getFoodModels()));
+        recyclerView.setAdapter(new VIewAdapter(getContext().getApplicationContext(),foodlists));
 
 
         Toast.makeText(getContext().getApplicationContext(), "on crete view", Toast.LENGTH_SHORT).show();
@@ -68,10 +77,42 @@ public class Tab1 extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-       getData.getalldata(Url,Tab1.this.getContext());
+        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
 
-        foodmodel=getData.getFoodModels();
-        System.out.println("ye on crerate me food moel hai...................................................."+foodmodel);
+        StringRequest request = new StringRequest(Request.Method.GET, Url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    System.out.println("in try catch............................");
+                    JSONArray array = new JSONArray(response);
+                    for (int i =0; i< array.length();i++){
+                        FoodModel foodItem = new FoodModel();
+                        JSONObject object = array.getJSONObject(i);
+                        foodItem.setFoodName(object.getString("food_name"));
+                        foodItem.setFoodCat(object.getString("food_cat"));
+                        foodItem.setFoodDes(object.getString("food_desc"));
+                        foodItem.setFoodPrice(object.getInt("food_price"));
+                        foodItem.setFood_imag_url(object.getString("food_image_blob"));
+                        foodlists.add(foodItem);
+
+                    }
+                    RecyclerView recyclerView= view.findViewById(R.id.layout);
+                    recyclerView.hasFixedSize();
+                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                    recyclerView.setAdapter(new VIewAdapter(getContext().getApplicationContext(),foodlists));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(request);
+
 
 
 

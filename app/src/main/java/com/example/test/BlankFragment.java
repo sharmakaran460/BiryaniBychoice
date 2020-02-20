@@ -66,6 +66,7 @@ public class BlankFragment extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         recyclerView.setAdapter(new ComboAdapter(foodModels));
 
 
@@ -75,6 +76,7 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         String eggurl="http://61.247.229.49:8082/biryaniweb/food/cat/egg";
         RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
 
