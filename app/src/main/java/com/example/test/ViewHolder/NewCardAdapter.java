@@ -1,5 +1,6 @@
 package com.example.test.ViewHolder;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +16,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Model.FoodModel;
 import com.example.test.R;
+import com.example.test.Sqldirectory.DatabaseHelper;
 
 import java.util.ArrayList;
 
 public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHolder> {
     View view;
     ArrayList<FoodModel> food_list;
+    DatabaseHelper data_base;
+    Context context;
+    TextView cart_amout,items_total;
     int num=0;
 
     public NewCardAdapter(ArrayList<FoodModel> food_list) {
         this.food_list = food_list;
+    }
+    public NewCardAdapter(ArrayList<FoodModel> food_list, Context context, TextView cart_amout, TextView items_total)
+    {
+        this.food_list = food_list;
+        this.context = context;
+        this.cart_amout = cart_amout;
+        this.items_total = items_total;
+        data_base = new DatabaseHelper(context);
     }
 
     @NonNull
@@ -47,7 +60,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             public void onClick(View v) {
                 num++;
                 holder.counter_text.setText(String.valueOf(num));
-                holder.add_btn.setVisibility(View.INVISIBLE);
+                holder.linearLayout_btn.setVisibility(View.INVISIBLE);
                 holder.linearLayout.setVisibility(View.VISIBLE);
 
             }
@@ -66,7 +79,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 {
                     num--;
                     holder.linearLayout.setVisibility(View.INVISIBLE);
-                    holder.add_btn.setVisibility(View.VISIBLE);
+                    holder.linearLayout_btn.setVisibility(View.VISIBLE);
                 }
                 else {
                     num--;
@@ -94,7 +107,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         TextView food_name, food_price, food_desc, counter_text;
         Button add_btn;
         ImageButton  add_counter, min_counter;
-        LinearLayout linearLayout;
+        LinearLayout linearLayout, linearLayout_btn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             food_desc=itemView.findViewById(R.id.new_c_desc);
@@ -106,6 +119,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             add_counter=itemView.findViewById(R.id.new_c_count_plus);
             min_counter=itemView.findViewById(R.id.new_c_count_min);
             counter_text=itemView.findViewById(R.id.new_c_count_num);
+            linearLayout_btn= itemView.findViewById(R.id.linear_layout_button);
 
         }
     }

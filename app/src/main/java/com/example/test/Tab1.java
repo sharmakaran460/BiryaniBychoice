@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.test.BAckgrounddata.GetData;
 import com.example.test.Model.FoodModel;
+import com.example.test.Sqldirectory.DatabaseHelper;
 import com.example.test.ViewHolder.NewCardAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
 
@@ -47,6 +49,9 @@ public class Tab1 extends Fragment {
         View view;
     static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
     final ArrayList<FoodModel> foodlists=new ArrayList<>();
+    TextView cart_amout;
+    TextView items_total;
+    DatabaseHelper data_base;
 
 
     public Tab1() {
@@ -57,6 +62,18 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
            view =  inflater.inflate(R.layout.fragment_tab1, container, false);
+        cart_amout = view.findViewById(R.id.cart_amout);
+        items_total=view.findViewById(R.id.items_total);
+        String amount =  data_base.get_the_total_amount();
+        String quantity = data_base. get_the_total_quantity();
+        if(amount!=null)
+        {
+            cart_amout.setText("₹"+amount);
+        }
+        if(quantity!=null)
+        {
+            items_total.setText(""+quantity+" Item");
+        }
 
 
 
@@ -65,10 +82,8 @@ public class Tab1 extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-        recyclerView.setAdapter(new NewCardAdapter(foodlists));
+        recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
 
-
-        Toast.makeText(getContext().getApplicationContext(), "on crete view", Toast.LENGTH_SHORT).show();
 
          return view;
 
