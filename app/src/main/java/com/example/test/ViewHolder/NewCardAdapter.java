@@ -76,6 +76,16 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                  holder.cat_icon_image.setImageResource(R.drawable.nonveg);
         }
 
+
+        if(food_list.get(position).getQuantity()>0)
+        {
+            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
+            holder.linearLayout_counter.setVisibility(View.VISIBLE);
+            holder.counter_text.setText(String.valueOf(quintity[0]));
+        }
+
+
+
         holder.add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +94,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
                 Log.e("Result",result+"");
                 holder.linearLayout_btn.setVisibility(View.INVISIBLE);
-                holder.linearLayout.setVisibility(View.VISIBLE);
+                holder.linearLayout_counter.setVisibility(View.VISIBLE);
                 //bottom_sheet_layout.setVisibility(View.VISIBLE);
 
                 if(result>0)
@@ -130,6 +140,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                         Log.e("Result_amount",amount+"");
                     }
             }
+
         });
         holder.min_counter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +167,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 {
                     holder.add_btn.setVisibility(View.VISIBLE);
                     holder.linearLayout_btn.setVisibility(View.VISIBLE);
-                    holder.linearLayout.setVisibility(View.INVISIBLE);
+                    holder.linearLayout_counter.setVisibility(View.INVISIBLE);
                     //bottom_sheet_layout.setVisibility(View.INVISIBLE);
 
                 }
@@ -186,7 +197,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         TextView food_name, food_price, food_desc, counter_text;
         Button add_btn;
         ImageButton  add_counter, min_counter;
-        LinearLayout linearLayout, linearLayout_btn;
+        LinearLayout linearLayout_counter, linearLayout_btn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cat_icon_image=itemView.findViewById(R.id.new_c_cat_icon);
@@ -195,7 +206,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             food_name=itemView.findViewById(R.id.new_c_f_name);
             food_price=itemView.findViewById(R.id.new_c_price);
             add_btn=itemView.findViewById(R.id.new_c_add_btn);
-            linearLayout=itemView.findViewById(R.id.new_c_counter_layout);
+            linearLayout_counter=itemView.findViewById(R.id.new_c_counter_layout);
             add_counter=itemView.findViewById(R.id.new_c_count_plus);
             min_counter=itemView.findViewById(R.id.new_c_count_min);
             counter_text=itemView.findViewById(R.id.new_c_count_num);
