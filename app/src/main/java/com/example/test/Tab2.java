@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.test.Model.Book;
 import com.example.test.Model.FoodModel;
 import com.example.test.Model.NonVegBiryani;
+import com.example.test.Sqldirectory.DatabaseHelper;
 import com.example.test.ViewHolder.BiryaniAdapter;
 import com.example.test.ViewHolder.ComboAdapter;
 import com.example.test.ViewHolder.NewCardAdapter;
@@ -56,6 +57,9 @@ public class Tab2 extends Fragment {
      View view;
     ArrayList<NonVegBiryani> biryaniList = new ArrayList<>();
     final ArrayList<FoodModel> foodModels=new ArrayList<>();
+    TextView cart_amout;
+    TextView items_total;
+    DatabaseHelper data_base;
 
     public Tab2() {
         // Required empty public constructor
@@ -67,11 +71,27 @@ public class Tab2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
+
+        cart_amout = view.findViewById(R.id.cart_amout);
+        items_total=view.findViewById(R.id.items_total);
+
+
+        data_base=new DatabaseHelper(getActivity());
+        String amount =  data_base.get_the_total_amount();
+        String quantity = data_base. get_the_total_quantity();
+        if(amount!=null)
+        {
+            cart_amout.setText("₹"+amount);
+        }
+        if(quantity!=null)
+        {
+            items_total.setText(""+quantity+" Item");
+        }
         RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-        recyclerView.setAdapter(new NewCardAdapter(foodModels));
-        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+        recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+
 
 
    return view;
@@ -105,7 +125,8 @@ public class Tab2 extends Fragment {
                             RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
                             recyclerView.hasFixedSize();
                             recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                            recyclerView.setAdapter(new NewCardAdapter(foodModels));
+                            recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+
 
                         }catch (Exception e)
                         {

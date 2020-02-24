@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class Tab1 extends Fragment {
     TextView cart_amout;
     TextView items_total;
     DatabaseHelper data_base;
+    LinearLayout bottom_sheet_layout;
 
 
     public Tab1() {
@@ -63,6 +65,7 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
            view =  inflater.inflate(R.layout.fragment_tab1, container, false);
+           bottom_sheet_layout=view.findViewById(R.id.bottom_sheet);
         cart_amout = view.findViewById(R.id.cart_amout);
         items_total=view.findViewById(R.id.items_total);
         data_base=new DatabaseHelper(getActivity());
@@ -85,7 +88,7 @@ public class Tab1 extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
-        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+
 
 
          return view;
@@ -108,19 +111,32 @@ public class Tab1 extends Fragment {
                     for (int i =0; i< array.length();i++){
                         FoodModel foodItem = new FoodModel();
                         JSONObject object = array.getJSONObject(i);
+                        foodItem.setFoodid(object.getInt("food_id"));
                         foodItem.setFoodName(object.getString("food_name"));
                         foodItem.setFoodCat(object.getString("food_cat"));
                         foodItem.setFoodDes(object.getString("food_desc"));
                         foodItem.setFoodPrice(object.getInt("food_price"));
                         foodItem.setFood_imag_url(object.getString("food_image_blob"));
+
+                        String quantity =  data_base. get_the_total_quantity_by_id(Integer.toString(foodItem.getFoodid()));
+
+                        if(quantity!=null)
+                        {
+                            foodItem.setQuantity(Integer.parseInt(quantity));
+                        }
+                        else
+                        {
+                            foodItem.setQuantity(0);
+                        }
                         foodlists.add(foodItem);
 
                     }
+
                     RecyclerView recyclerView= view.findViewById(R.id.layout);
                     recyclerView.hasFixedSize();
                     recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-                    recyclerView.setAdapter(new NewCardAdapter(foodlists));
-                    recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+                    recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

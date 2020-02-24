@@ -2,6 +2,7 @@ package com.example.test.ViewHolder;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,15 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     DatabaseHelper data_base;
     Context context;
     TextView cart_amout,items_total;
-    int num=0;
+    LinearLayout bottom_sheet_layout;
+
+    public NewCardAdapter(ArrayList<FoodModel> food_list, Context context, TextView cart_amout, TextView items_total, LinearLayout bottom_sheet_layout) {
+        this.food_list = food_list;
+        this.context = context;
+        this.cart_amout = cart_amout;
+        this.items_total = items_total;
+        this.bottom_sheet_layout = bottom_sheet_layout;
+    }
 
     public NewCardAdapter(ArrayList<FoodModel> food_list) {
         this.food_list = food_list;
@@ -51,10 +60,14 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+
+        final int[] quintity = {0};
         holder.food_name.setText(food_list.get(position).getFoodName());
         holder.food_price.setText(String.valueOf(food_list.get(position).getFoodPrice()));
         holder.food_desc.setText(food_list.get(position).getFoodDes());
+        quintity[0] = food_list.get(position).getQuantity();
+
         if(food_list.get(position).getFoodCat().equals("veg"))
         {
             holder.cat_icon_image.setImageResource(R.drawable.veg);
@@ -66,33 +79,89 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                num++;
-                holder.counter_text.setText(String.valueOf(num));
+                quintity[0] =  quintity[0]+1;
+                holder.counter_text.setText(String.valueOf(quintity[0]));
+                long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
+                Log.e("Result",result+"");
                 holder.linearLayout_btn.setVisibility(View.INVISIBLE);
                 holder.linearLayout.setVisibility(View.VISIBLE);
+                //bottom_sheet_layout.setVisibility(View.VISIBLE);
+
+                if(result>0)
+                {
+                    String amount =  data_base.get_the_total_amount();
+                    String quantity = data_base. get_the_total_quantity();
+                    cart_amout.setText("₹"+amount);
+                    if(quantity!=null)
+                    {
+                        items_total.setText(""+quantity+" Item");
+                    }
+                    Log.e("Result_amount",amount+"");
+                }
+
 
             }
         });
         holder.add_counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                num++;
-                holder.counter_text.setText(String.valueOf(num));
+                quintity[0]=quintity[0]+1;
+                holder.counter_text.setText(String.valueOf(quintity[0]));
+
+                long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),String.valueOf(quintity[0]));
+
+
+                Log.e("Result _Add",quintity[0]+"");
+
+                //     long result =   data_base.save_cart_value(food_list.get(position).getFood_id(),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(food_list.get(position).getQuantity()));
+
+                if(result>0)
+                    if(result>0)
+                    {
+                        String amount =  data_base.get_the_total_amount();
+                        String quantity = data_base. get_the_total_quantity();
+                        cart_amout.setText("₹"+amount);
+                        if(quantity!=null)
+                        {
+                            items_total.setText(""+quantity+" Item");
+                        }
+                        Log.e("Result_amount",amount+"");
+                    }
             }
         });
         holder.min_counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(num==1)
+                if(quintity[0]>0)
                 {
-                    num--;
-                    holder.linearLayout.setVisibility(View.INVISIBLE);
+                    quintity[0]=quintity[0]-1;
+                    holder.counter_text.setText(String.valueOf(quintity[0]));
+                    long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),String.valueOf(quintity[0]));
+
+                    if(result>0)
+                    {
+                        String amount =  data_base.get_the_total_amount();
+                        String quantity = data_base. get_the_total_quantity();
+                        cart_amout.setText("₹"+amount);
+                        if(quantity!=null)
+                        {
+                            items_total.setText(""+quantity+" Item");
+                        }
+                        Log.e("Result_amount",amount+"");
+                    }
+                }
+                else
+                {
+                    holder.add_btn.setVisibility(View.VISIBLE);
                     holder.linearLayout_btn.setVisibility(View.VISIBLE);
+                    holder.linearLayout.setVisibility(View.INVISIBLE);
+                    //bottom_sheet_layout.setVisibility(View.INVISIBLE);
+
                 }
-                else {
-                    num--;
-                    holder.counter_text.setText(String.valueOf(num));
-                }
+
+
+
+                Log.e("Result Sub",quintity[0]+"");
             }
         });
 

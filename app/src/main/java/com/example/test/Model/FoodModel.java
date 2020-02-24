@@ -11,10 +11,19 @@ public class FoodModel {
     String foodCat;
     String foodDes;
     String food_imag_url;
+int quantity;
     byte[] image;
     int foodPrice;
 
     ArrayList<FoodModel> foodModelslist ;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public byte[] getImage() {
         return image;
