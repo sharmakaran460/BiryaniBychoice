@@ -102,6 +102,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
             }
         });
+
+
         holder.add_counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
