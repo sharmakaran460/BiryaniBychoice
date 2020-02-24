@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.test.Model.FoodModel;
 import com.example.test.ViewHolder.ComboAdapter;
 import com.example.test.ViewHolder.NewCardAdapter;
+import com.example.test.utlity.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +71,7 @@ public class BlankFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
         recyclerView.setAdapter(new NewCardAdapter(foodModels));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
 
         return view;

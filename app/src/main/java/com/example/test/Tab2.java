@@ -32,6 +32,7 @@ import com.example.test.ViewHolder.BiryaniAdapter;
 import com.example.test.ViewHolder.ComboAdapter;
 import com.example.test.ViewHolder.NewCardAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
+import com.example.test.utlity.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +71,7 @@ public class Tab2 extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodModels));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
 
    return view;

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +55,13 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.food_name.setText(food_list.get(position).getFoodName());
         holder.food_price.setText(String.valueOf(food_list.get(position).getFoodPrice()));
         holder.food_desc.setText(food_list.get(position).getFoodDes());
+        if(food_list.get(position).getFoodCat().equals("veg"))
+        {
+            holder.cat_icon_image.setImageResource(R.drawable.veg);
+        }
+        else {
+                 holder.cat_icon_image.setImageResource(R.drawable.nonveg);
+        }
 
         holder.add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,13 +111,14 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        ImageView imageView, cat_icon_image;
         TextView food_name, food_price, food_desc, counter_text;
         Button add_btn;
         ImageButton  add_counter, min_counter;
         LinearLayout linearLayout, linearLayout_btn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cat_icon_image=itemView.findViewById(R.id.new_c_cat_icon);
             food_desc=itemView.findViewById(R.id.new_c_desc);
             imageView=itemView.findViewById(R.id.new_c_image);
             food_name=itemView.findViewById(R.id.new_c_f_name);

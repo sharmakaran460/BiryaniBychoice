@@ -33,6 +33,7 @@ import com.example.test.Model.FoodModel;
 import com.example.test.Sqldirectory.DatabaseHelper;
 import com.example.test.ViewHolder.NewCardAdapter;
 import com.example.test.ViewHolder.VIewAdapter;
+import com.example.test.utlity.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,7 @@ public class Tab1 extends Fragment {
            view =  inflater.inflate(R.layout.fragment_tab1, container, false);
         cart_amout = view.findViewById(R.id.cart_amout);
         items_total=view.findViewById(R.id.items_total);
+        data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();
         if(amount!=null)
@@ -83,6 +85,7 @@ public class Tab1 extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
 
          return view;
@@ -117,6 +120,7 @@ public class Tab1 extends Fragment {
                     recyclerView.hasFixedSize();
                     recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
                     recyclerView.setAdapter(new NewCardAdapter(foodlists));
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
