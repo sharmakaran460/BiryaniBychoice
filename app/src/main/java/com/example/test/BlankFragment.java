@@ -105,6 +105,7 @@ public class BlankFragment extends Fragment {
                             recyclerView.hasFixedSize();
                             recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
                             recyclerView.setAdapter(new NewCardAdapter(foodModels));
+                            recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
                         }catch (Exception e)
                         {

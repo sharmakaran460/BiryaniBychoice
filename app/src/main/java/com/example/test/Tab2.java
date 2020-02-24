@@ -106,6 +106,7 @@ public class Tab2 extends Fragment {
                             recyclerView.hasFixedSize();
                             recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                             recyclerView.setAdapter(new NewCardAdapter(foodModels));
+                            recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
                         }catch (Exception e)
                         {
