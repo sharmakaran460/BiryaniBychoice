@@ -14,27 +14,27 @@
         android:layout_marginLeft="15sp"
         android:background="@drawable/header1"/>
     <TextView
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:id="@+id/header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wellcome Sherry"
 
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         android:fontFamily="casual"
         android:textStyle="bold"
 
         />
     <TextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="www.lassezbiryani.com"
+        android:text="www.biryaniBychoice.com"
         android:id="@+id/desc"
         android:layout_below="@+id/header_title"
         android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="10sp"
-        android:fontFamily="casual"
-        android:textStyle="bold"/>
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="10sp" />
 
 
 

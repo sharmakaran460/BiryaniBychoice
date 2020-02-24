@@ -128,7 +128,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             add_counter=itemView.findViewById(R.id.new_c_count_plus);
             min_counter=itemView.findViewById(R.id.new_c_count_min);
             counter_text=itemView.findViewById(R.id.new_c_count_num);
-            //linearLayout_btn= itemView.findViewById(R.id.linear_layout_button);
+            linearLayout_btn= itemView.findViewById(R.id.linear_layout_button);
 
         }
     }
