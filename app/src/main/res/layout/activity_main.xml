@@ -40,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/white"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:drawablePadding="2sp"
                 android:hint="Your location"
                 android:id="@+id/locationText"/>

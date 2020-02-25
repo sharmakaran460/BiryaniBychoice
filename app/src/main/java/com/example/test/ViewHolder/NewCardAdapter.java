@@ -1,5 +1,6 @@
 package com.example.test.ViewHolder;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Model.FoodModel;
@@ -24,11 +26,14 @@ import java.util.ArrayList;
 
 public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHolder> {
     View view;
+    Dialog mdaialogue;
     ArrayList<FoodModel> food_list;
     DatabaseHelper data_base;
     Context context;
     TextView cart_amout,items_total;
     LinearLayout bottom_sheet_layout;
+    Toolbar toolbar;
+    TextView firstprice, secondprice,thirdprice;
 
     public NewCardAdapter(ArrayList<FoodModel> food_list, Context context, TextView cart_amout, TextView items_total, LinearLayout bottom_sheet_layout) {
         this.food_list = food_list;
@@ -56,6 +61,19 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         LayoutInflater inflater= LayoutInflater.from(parent.getContext());
         view=inflater.inflate(R.layout.new_food_card,parent,false);
         ViewHolder holder=new ViewHolder(view);
+
+
+
+        mdaialogue = new Dialog(context);
+
+
+        mdaialogue.setContentView(R.layout.biryaniquantity);
+
+        toolbar = mdaialogue.findViewById(R.id.biryanitoolbar);
+        firstprice= mdaialogue.findViewById(R.id.popup_price_1);
+        secondprice= mdaialogue.findViewById(R.id.popup_price_2);
+        thirdprice =mdaialogue.findViewById(R.id.popup_price_3);
+
         return holder;
     }
 
@@ -76,10 +94,15 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                  holder.cat_icon_image.setImageResource(R.drawable.nonveg);
         }
 
+
+
         holder.add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 quintity[0] =  quintity[0]+1;
+                toolbar.setTitle(food_list.get(position).getFoodName());
+                firstprice.setText(food_list.get(position).getFoodPrice());
+                mdaialogue.show();
                 holder.counter_text.setText(String.valueOf(quintity[0]));
                 long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
                 Log.e("Result",result+"");

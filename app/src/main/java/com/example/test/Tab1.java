@@ -81,9 +81,6 @@ public class Tab1 extends Fragment {
         }
 
 
-
-
-
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
