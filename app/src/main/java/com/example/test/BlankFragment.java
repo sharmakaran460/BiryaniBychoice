@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -55,12 +56,17 @@ public class BlankFragment extends Fragment {
     TextView cart_amout;
     TextView items_total;
     DatabaseHelper data_base;
-
+    LinearLayout bottomsheet;
 
     public BlankFragment() {
         // Required empty public constructor
     }
 
+    public BlankFragment(TextView cart_amout,TextView items_total,LinearLayout bottomsheet){
+        this.cart_amout =cart_amout;
+        this.items_total=items_total;
+        this.bottomsheet=bottomsheet;
+    }
 
 
 
@@ -71,9 +77,9 @@ public class BlankFragment extends Fragment {
         // Inflate the layout for this fragment
        view = inflater.inflate(R.layout.fragment_blank, container, false);
 
-        cart_amout = view.findViewById(R.id.cart_amout);
+        /*cart_amout = view.findViewById(R.id.cart_amout);
         items_total=view.findViewById(R.id.items_total);
-
+        bottomsheet =view.findViewById(R.id.bottom_sheet);*/
         data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();
@@ -90,7 +96,7 @@ public class BlankFragment extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
-        recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+       recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
         recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
 
@@ -124,7 +130,7 @@ public class BlankFragment extends Fragment {
                             RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
                             recyclerView.hasFixedSize();
                             recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-                            recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+                           recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
 
                         }catch (Exception e)
                         {

@@ -1,5 +1,6 @@
 package com.example.test.ViewHolder;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -10,10 +11,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Model.FoodModel;
@@ -27,8 +30,12 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     ArrayList<FoodModel> food_list;
     DatabaseHelper data_base;
     Context context;
-    TextView cart_amout,items_total;
+    TextView cart_amout,items_total ,firstprice,secondprice,thirdprice;
     LinearLayout bottom_sheet_layout;
+    Toolbar toolbar;
+    Button biryaniquantitybtn;
+    Dialog dialog;
+    RadioButton btn1,btn2,btn3;
 
     public NewCardAdapter(ArrayList<FoodModel> food_list, Context context, TextView cart_amout, TextView items_total, LinearLayout bottom_sheet_layout) {
         this.food_list = food_list;
@@ -36,6 +43,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.cart_amout = cart_amout;
         this.items_total = items_total;
         this.bottom_sheet_layout = bottom_sheet_layout;
+        data_base = new DatabaseHelper(context);
     }
 
     public NewCardAdapter(ArrayList<FoodModel> food_list) {
@@ -56,6 +64,17 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         LayoutInflater inflater= LayoutInflater.from(parent.getContext());
         view=inflater.inflate(R.layout.new_food_card,parent,false);
         ViewHolder holder=new ViewHolder(view);
+        dialog = new Dialog(context);
+        dialog.setContentView(R.layout.biryaniquantity);
+        toolbar = dialog.findViewById(R.id.biryanitoolbar);
+        firstprice = dialog.findViewById(R.id.popup_price_1);
+        secondprice =dialog.findViewById(R.id.popup_price_2);
+        thirdprice = dialog.findViewById(R.id.popup_price_3);
+        biryaniquantitybtn =dialog.findViewById(R.id.addbutton);
+        btn1 =dialog.findViewById(R.id.radio_btn_1);
+        btn2 =dialog.findViewById(R.id.radio_btn_2);
+        btn3 =dialog.findViewById(R.id.radio_btn_3);
+
         return holder;
     }
 
@@ -81,12 +100,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             public void onClick(View v) {
                 quintity[0] =  quintity[0]+1;
                 holder.counter_text.setText(String.valueOf(quintity[0]));
-                long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
-                Log.e("Result",result+"");
-                holder.linearLayout_btn.setVisibility(View.INVISIBLE);
-                holder.linearLayout.setVisibility(View.VISIBLE);
-                //bottom_sheet_layout.setVisibility(View.VISIBLE);
-
+                final long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
                 if(result>0)
                 {
                     String amount =  data_base.get_the_total_amount();
@@ -100,8 +114,31 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 }
 
 
+                toolbar.setTitle(food_list.get(position).getFoodName());
+                firstprice.setText(String.valueOf(food_list.get(position).getFoodPrice()));
+                dialog.show();
+
+                biryaniquantitybtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            bottom_sheet_layout.setVisibility(View.VISIBLE);
+                            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
+                            holder.linearLayout.setVisibility(View.VISIBLE);
+
+
+                            dialog.dismiss();
+
+                        }
+
+
+                });
+
+
+
             }
         });
+
+
 
 
         holder.add_counter.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +187,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                             items_total.setText(""+quantity+" Item");
                         }
                         Log.e("Result_amount",amount+"");
+                    }else {
+                        bottom_sheet_layout.setVisibility(View.INVISIBLE);
                     }
                 }
                 else

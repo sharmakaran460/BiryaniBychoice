@@ -60,11 +60,16 @@ public class Tab2 extends Fragment {
     TextView cart_amout;
     TextView items_total;
     DatabaseHelper data_base;
+    LinearLayout bottomsheet;
 
     public Tab2() {
         // Required empty public constructor
     }
-
+public Tab2(TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
+        this.cart_amout =cart_amout;
+        this.items_total =items_total;
+        this.bottomsheet=bottomsheet;
+}
 
 
     @Override
@@ -72,8 +77,9 @@ public class Tab2 extends Fragment {
                              Bundle savedInstanceState) {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
 
-        cart_amout = view.findViewById(R.id.cart_amout);
+     /*   cart_amout = view.findViewById(R.id.cart_amout);
         items_total=view.findViewById(R.id.items_total);
+        bottomsheet =view.findViewById(R.id.bottom_sheet);*/
 
 
         data_base=new DatabaseHelper(getActivity());
@@ -90,7 +96,7 @@ public class Tab2 extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-        recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+       recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
 
 
 
@@ -125,7 +131,7 @@ public class Tab2 extends Fragment {
                             RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
                             recyclerView.hasFixedSize();
                             recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                            recyclerView.setAdapter(new NewCardAdapter(foodModels,getActivity(),cart_amout,items_total));
+                            recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
 
 
                         }catch (Exception e)

@@ -116,7 +116,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/new_c_count_plus"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_add_black_24dp"/>
+                android:background="@drawable/ic_add_black_24dp"
+               />
 
         </LinearLayout>
 

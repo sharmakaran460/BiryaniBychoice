@@ -57,6 +57,7 @@ public class Tab1 extends Fragment {
     LinearLayout bottom_sheet_layout;
 
 
+
     public Tab1() {
         // Required empty public constructor
     }
@@ -84,7 +85,7 @@ public class Tab1 extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-        recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
+       // recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
 
 
 
@@ -132,7 +133,7 @@ public class Tab1 extends Fragment {
                     RecyclerView recyclerView= view.findViewById(R.id.layout);
                     recyclerView.hasFixedSize();
                     recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-                    recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
+                   // recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
 
 
                 } catch (JSONException e) {

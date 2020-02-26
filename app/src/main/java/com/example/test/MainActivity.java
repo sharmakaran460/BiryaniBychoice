@@ -30,6 +30,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.OrderCart.Cart;
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private EditText locText;
     private ImageButton manageAddress;
+    TextView cart_amount,items_total;
+    LinearLayout bottomsheet;
 
     Location loc;
     private DrawerLayout drawerLayout;
@@ -66,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cart_amount = findViewById(R.id.cart_amout);
+        items_total=findViewById(R.id.items_total);
+        bottomsheet =findViewById(R.id.bottom_sheet);
 
         manageAddress =findViewById(R.id.locationButton);
         toolbar = findViewById(R.id.toolbar);
@@ -116,9 +124,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //For Tab view this View pager can be used
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addfragment(new Tab1(), "All");
-        viewPagerAdapter.addfragment(new Tab2(), "Veg");
-        viewPagerAdapter.addfragment(new BlankFragment(), "Nonveg");
+        //viewPagerAdapter.addfragment(new Tab1(), "All");
+        viewPagerAdapter.addfragment(new Tab2(cart_amount,items_total,bottomsheet), "Veg");
+        viewPagerAdapter.addfragment(new BlankFragment(cart_amount,items_total,bottomsheet), "Nonveg");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabbar.setupWithViewPager(viewPager);
@@ -132,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{ACCESS_FINE_LOCATION},1);
             Toast.makeText(this, "permission nai hai be", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "permission hai", Toast.LENGTH_SHORT).show();
             client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {

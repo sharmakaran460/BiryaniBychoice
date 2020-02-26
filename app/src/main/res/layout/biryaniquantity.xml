@@ -127,6 +127,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_effect_button"
         android:text="Add"
+        android:id="@+id/addbutton"
         android:layout_margin="5sp"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_alignParentBottom="true"
