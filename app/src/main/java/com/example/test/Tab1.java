@@ -55,20 +55,27 @@ public class Tab1 extends Fragment {
     TextView items_total;
     DatabaseHelper data_base;
     LinearLayout bottom_sheet_layout;
+    GetData getData=new GetData();
+
 
 
 
     public Tab1() {
         // Required empty public constructor
     }
+    public  Tab1(TextView cart_amout,TextView items_total,LinearLayout bottom_sheet_layout){
+        this.cart_amout =cart_amout;
+        this.items_total=items_total;
+        this.bottom_sheet_layout =bottom_sheet_layout;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
            view =  inflater.inflate(R.layout.fragment_tab1, container, false);
-           bottom_sheet_layout=view.findViewById(R.id.bottom_sheet);
+          /* bottom_sheet_layout=view.findViewById(R.id.bottom_sheet);
         cart_amout = view.findViewById(R.id.cart_amout);
-        items_total=view.findViewById(R.id.items_total);
+        items_total=view.findViewById(R.id.items_total);*/
         data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();
@@ -82,10 +89,16 @@ public class Tab1 extends Fragment {
         }
 
 
-        RecyclerView recyclerView= view.findViewById(R.id.layout);
-        recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-       // recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
+        getData.getalldata(Url, getContext(), new GetData.CallBack() {
+            @Override
+            public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
+                RecyclerView recyclerView= view.findViewById(R.id.layout);
+                recyclerView.hasFixedSize();
+                recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+                recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total));
+            }
+        });
+
 
 
 
@@ -96,58 +109,7 @@ public class Tab1 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-
-        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-
-        StringRequest request = new StringRequest(Request.Method.GET, Url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    System.out.println("in try catch............................");
-                    JSONArray array = new JSONArray(response);
-                    for (int i =0; i< array.length();i++){
-                        FoodModel foodItem = new FoodModel();
-                        JSONObject object = array.getJSONObject(i);
-                        foodItem.setFoodid(object.getInt("food_id"));
-                        foodItem.setFoodName(object.getString("food_name"));
-                        foodItem.setFoodCat(object.getString("food_cat"));
-                        foodItem.setFoodDes(object.getString("food_desc"));
-                        foodItem.setFoodPrice(object.getInt("food_price"));
-                        foodItem.setFood_imag_url(object.getString("food_image_blob"));
-
-                        String quantity =  data_base. get_the_total_quantity_by_id(Integer.toString(foodItem.getFoodid()));
-
-                        if(quantity!=null)
-                        {
-                            foodItem.setQuantity(Integer.parseInt(quantity));
-                        }
-                        else
-                        {
-                            foodItem.setQuantity(0);
-                        }
-                        foodlists.add(foodItem);
-
-                    }
-
-                    RecyclerView recyclerView= view.findViewById(R.id.layout);
-                    recyclerView.hasFixedSize();
-                    recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-                   // recyclerView.setAdapter(new NewCardAdapter(foodlists,getActivity(),cart_amout,items_total));
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        queue.add(request);
-
+        // no need
 
 
 

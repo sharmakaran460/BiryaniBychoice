@@ -19,7 +19,7 @@ import com.example.test.Sqldirectory.CartLitedb;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class FlashScreen extends AppCompatActivity {
-String url ="http://61.247.229.49:8082/biryani/food";
+String url ="http://61.247.229.49:8082/biryaniweb/food";
     Button login ,signup;
     TextView text;
 

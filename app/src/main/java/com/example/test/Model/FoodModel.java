@@ -99,11 +99,9 @@ int quantity;
 
     public void setFood_imag_url(String food_imag_url) {
         String imageData[] = food_imag_url.split(",");
-        System.out.println("ye data hai split hone k bad........................."+imageData[0]);
         try{
             this.food_imag_url =imageData[1];
             setImage(Base64.decode(this.food_imag_url,Base64.DEFAULT));
-            System.out.println("value at one "+this.food_imag_url);
         }catch (ArrayIndexOutOfBoundsException e)
         {
             e.getStackTrace();

@@ -2,6 +2,7 @@ package com.example.test;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.test.BAckgrounddata.GetData;
 import com.example.test.Model.Book;
 import com.example.test.Model.FoodModel;
 import com.example.test.Model.NonVegBiryani;
@@ -56,11 +58,14 @@ import java.util.ArrayList;
 public class Tab2 extends Fragment {
      View view;
     ArrayList<NonVegBiryani> biryaniList = new ArrayList<>();
-    final ArrayList<FoodModel> foodModels=new ArrayList<>();
+   ArrayList<FoodModel> foodModels=new ArrayList<>();
     TextView cart_amout;
     TextView items_total;
     DatabaseHelper data_base;
     LinearLayout bottomsheet;
+    GetData getData=new GetData();
+    String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/veg";
+    RecyclerView recyclerView;
 
     public Tab2() {
         // Required empty public constructor
@@ -69,17 +74,29 @@ public Tab2(TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
         this.cart_amout =cart_amout;
         this.items_total =items_total;
         this.bottomsheet=bottomsheet;
+        //this.foodModels=foodModels;
 }
 
+public Tab2(ArrayList<FoodModel> foodModels){
+        this.foodModels =foodModels;
+}
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+   //getData.getalldata(nonveg,context);
+        System.out.println("data ye hai on attach me"+getData.getFoodModels());
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
 
-     /*   cart_amout = view.findViewById(R.id.cart_amout);
-        items_total=view.findViewById(R.id.items_total);
-        bottomsheet =view.findViewById(R.id.bottom_sheet);*/
+
+
 
 
         data_base=new DatabaseHelper(getActivity());
@@ -93,60 +110,36 @@ public Tab2(TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
         {
             items_total.setText(""+quantity+" Item");
         }
-        RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
-        recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-       recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
+
+        // data yaha se aa raha hai
+        getData.getalldata(nonveg, getContext(), new GetData.CallBack() {
+            @Override
+            public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
+
+                recyclerView= view.findViewById(R.id.biryanirecycler);
+                recyclerView.hasFixedSize();
+                recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+
+
+                recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total,bottomsheet));
+            }
+        });
+
+
+
+
 
 
 
    return view;
     }
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        RequestQueue requestQueue= Volley.newRequestQueue(getContext().getApplicationContext());
+     // noo need
 
-        String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/veg";
-
-
-        StringRequest request = new StringRequest(Request.Method.GET, nonveg,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray array =new JSONArray(response);
-                            for (int i = 0; i < array.length(); i++) {
-                                FoodModel foodItem = new FoodModel();
-                                JSONObject object = array.getJSONObject(i);
-                                foodItem.setFoodName(object.getString("food_name"));
-                                foodItem.setFoodCat(object.getString("food_cat"));
-                                foodItem.setFoodDes(object.getString("food_desc"));
-                                foodItem.setFoodPrice(object.getInt("food_price"));
-                                foodItem.setFood_imag_url(object.getString("food_image_blob"));
-                                foodModels.add(i,foodItem);
-                            }
-                            System.out.println("here your fooditemsssssssssssssssssssssssssssssss"+foodModels);
-                            RecyclerView recyclerView= view.findViewById(R.id.biryanirecycler);
-                            recyclerView.hasFixedSize();
-                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                            recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
-
-
-                        }catch (Exception e)
-                        {
-
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        requestQueue.add(request);
 
     }
 }

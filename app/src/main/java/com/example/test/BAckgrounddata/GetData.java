@@ -1,6 +1,7 @@
 package com.example.test.BAckgrounddata;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,23 +16,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GetData {
-  ArrayList<FoodModel> foodlist=new ArrayList<>();
+
+   public ArrayList<FoodModel> foodlistAll;
+
+  public GetData(){
+  }
+
 
     public void setFoodModels(ArrayList<FoodModel> foodlist) {
-        this.foodlist=foodlist;
+        this.foodlistAll=foodlist;
     }
 
     public ArrayList<FoodModel> getFoodModels() {
-        return foodlist;
+
+          return foodlistAll;
     }
 
 
 
-    public  void getalldata(String url,Context context){
+    public void getalldata(String url, Context context, final CallBack callBack ){
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-        final ArrayList<FoodModel> foodlists=new ArrayList<>();
+        final  ArrayList<FoodModel> foodlists=new ArrayList<>();
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -49,8 +57,11 @@ public class GetData {
                       foodlists.add(foodItem);
                         foodItem.setFoodModelslist(foodlists);
                     }
-                    System.out.println("data here in getdata classsss"+foodlists);
+
+
+                    callBack.onSuccess(foodlists);
                     setFoodModels(foodlists);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -62,6 +73,12 @@ public class GetData {
             }
         });
         queue.add(request);
-    }
+
+  }
+
+ // public void getAlldata()
+  public interface CallBack{
+      void onSuccess(ArrayList<FoodModel> foodModelsAll);
+  }
 
 }

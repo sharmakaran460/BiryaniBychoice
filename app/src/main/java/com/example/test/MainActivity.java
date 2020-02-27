@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,7 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.view.WindowManager;
+
 
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView cart_amount,items_total;
     LinearLayout bottomsheet;
 
+
+
     Location loc;
     private DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         locText =findViewById(R.id.locationText);
         client = LocationServices.getFusedLocationProviderClient(this);
 
-        //requestPermission();
+
                 requestPerm();
 
 
@@ -108,12 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
-
-        // this is for not showng the status bar above the app
-       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
         tabbar = findViewById(R.id.tab);
         viewPager = findViewById(R.id.view_pager);
 
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //For Tab view this View pager can be used
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //viewPagerAdapter.addfragment(new Tab1(), "All");
+        //viewPagerAdapter.addfragment(new Tab1(cart_amount,items_total,bottomsheet), "All");
         viewPagerAdapter.addfragment(new Tab2(cart_amount,items_total,bottomsheet), "Veg");
         viewPagerAdapter.addfragment(new BlankFragment(cart_amount,items_total,bottomsheet), "Nonveg");
 
