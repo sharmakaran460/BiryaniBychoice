@@ -65,10 +65,12 @@ public class BlankFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public BlankFragment(TextView cart_amout,TextView items_total,LinearLayout bottomsheet ){
+    public BlankFragment(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,LinearLayout bottomsheet ){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottomsheet=bottomsheet;
+        this.combolist =foodModels;
+
     }
 
 
@@ -98,7 +100,7 @@ public class BlankFragment extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-        //data yaha se aa raha hai
+/*        //data yaha se aa raha hai
         getData.getalldata(eggurl, getContext(), new GetData.CallBack() {
             @Override
             public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
@@ -108,9 +110,16 @@ public class BlankFragment extends Fragment {
 
                 recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total,bottomsheet));
             }
-        });
+        });*/
+
+
 
        // recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+        RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
+        recyclerView.hasFixedSize();
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+
+        recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet));
 
 
         return view;

@@ -87,6 +87,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.food_desc.setText(food_list.get(position).getFoodDes());
         quintity[0] = food_list.get(position).getQuantity();
 
+
         if(food_list.get(position).getFoodCat().equals("veg"))
         {
             holder.cat_icon_image.setImageResource(R.drawable.veg);

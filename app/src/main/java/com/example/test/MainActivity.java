@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +34,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test.BAckgrounddata.GetData;
+import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageButton manageAddress;
     TextView cart_amount,items_total;
     LinearLayout bottomsheet;
-
+    ArrayList<FoodModel> foodModels;
+    final String url="http://61.247.229.49:8082/biryaniweb/food";
 
 
     Location loc;
@@ -119,14 +121,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //For Tab view this View pager can be used
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //viewPagerAdapter.addfragment(new Tab1(cart_amount,items_total,bottomsheet), "All");
-        viewPagerAdapter.addfragment(new Tab2(cart_amount,items_total,bottomsheet), "Veg");
-        viewPagerAdapter.addfragment(new BlankFragment(cart_amount,items_total,bottomsheet), "Nonveg");
+        GetData data = new GetData();
+        data.getalldata(url, getApplicationContext(), new GetData.CallBack() {
+            @Override
+            public void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon) {
 
-        viewPager.setAdapter(viewPagerAdapter);
-        tabbar.setupWithViewPager(viewPager);
+                foodModels=foodModelsAll;
+                //For Tab view this View pager can be used
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet), "All");
+                viewPagerAdapter.addfragment(new Tab2(foodModelsveg,cart_amount,items_total,bottomsheet), "Veg");
+                viewPagerAdapter.addfragment(new BlankFragment(foodModelsegnon,cart_amount,items_total,bottomsheet), "Nonveg");
+
+                viewPager.setAdapter(viewPagerAdapter);
+                tabbar.setupWithViewPager(viewPager);
+            }
+        });
+
+
+
 
         setupToolbar();
 

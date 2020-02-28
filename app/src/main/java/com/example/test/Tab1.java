@@ -50,7 +50,7 @@ import java.util.ArrayList;
 public class Tab1 extends Fragment {
         View view;
     static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
-    final ArrayList<FoodModel> foodlists=new ArrayList<>();
+    ArrayList<FoodModel> foodlists=new ArrayList<>();
     TextView cart_amout;
     TextView items_total;
     DatabaseHelper data_base;
@@ -63,19 +63,17 @@ public class Tab1 extends Fragment {
     public Tab1() {
         // Required empty public constructor
     }
-    public  Tab1(TextView cart_amout,TextView items_total,LinearLayout bottom_sheet_layout){
+    public  Tab1(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,LinearLayout bottom_sheet_layout){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottom_sheet_layout =bottom_sheet_layout;
+        this.foodlists=foodModels;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
            view =  inflater.inflate(R.layout.fragment_tab1, container, false);
-          /* bottom_sheet_layout=view.findViewById(R.id.bottom_sheet);
-        cart_amout = view.findViewById(R.id.cart_amout);
-        items_total=view.findViewById(R.id.items_total);*/
         data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();
@@ -89,6 +87,7 @@ public class Tab1 extends Fragment {
         }
 
 
+/*
         getData.getalldata(Url, getContext(), new GetData.CallBack() {
             @Override
             public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
@@ -98,7 +97,11 @@ public class Tab1 extends Fragment {
                 recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total));
             }
         });
-
+*/
+        RecyclerView recyclerView= view.findViewById(R.id.layout);
+        recyclerView.hasFixedSize();
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout));
 
 
 

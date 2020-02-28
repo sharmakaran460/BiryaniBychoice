@@ -40,6 +40,8 @@ public class GetData {
     public void getalldata(String url, Context context, final CallBack callBack ){
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         final  ArrayList<FoodModel> foodlists=new ArrayList<>();
+        final  ArrayList<FoodModel> foodlistsveg=new ArrayList<>();
+        final  ArrayList<FoodModel> foodlistsnonveg=new ArrayList<>();
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -56,10 +58,33 @@ public class GetData {
                         foodItem.setFood_imag_url(object.getString("food_image_blob"));
                       foodlists.add(foodItem);
                         foodItem.setFoodModelslist(foodlists);
+
+
+
+                        if(object.getString("food_cat").equals("veg")){
+                            FoodModel foodItemveg = new FoodModel();
+                            foodItemveg.setFoodName(object.getString("food_name"));
+                            foodItemveg.setFoodCat(object.getString("food_cat"));
+                            foodItemveg.setFoodDes(object.getString("food_desc"));
+                            foodItemveg.setFoodPrice(object.getInt("food_price"));
+                            foodItemveg.setFood_imag_url(object.getString("food_image_blob"));
+                            foodlistsveg.add(foodItemveg);
+                        }
+                        if (object.getString("food_cat").equals("nonveg") || object.getString("food_cat").equals("egg")){
+                            FoodModel foodItemeggnon = new FoodModel();
+                            foodItemeggnon.setFoodName(object.getString("food_name"));
+                            foodItemeggnon.setFoodCat(object.getString("food_cat"));
+                            foodItemeggnon.setFoodDes(object.getString("food_desc"));
+                            foodItemeggnon.setFoodPrice(object.getInt("food_price"));
+                            foodItemeggnon.setFood_imag_url(object.getString("food_image_blob"));
+                            foodlistsnonveg.add(foodItemeggnon);
+                        }
+
+
                     }
 
 
-                    callBack.onSuccess(foodlists);
+                    callBack.onSuccess(foodlists,foodlistsveg,foodlistsnonveg);
                     setFoodModels(foodlists);
 
                 } catch (JSONException e) {
@@ -78,7 +103,7 @@ public class GetData {
 
  // public void getAlldata()
   public interface CallBack{
-      void onSuccess(ArrayList<FoodModel> foodModelsAll);
+      void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon);
   }
 
 }

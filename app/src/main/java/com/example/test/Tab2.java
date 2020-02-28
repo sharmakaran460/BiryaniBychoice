@@ -70,11 +70,11 @@ public class Tab2 extends Fragment {
     public Tab2() {
         // Required empty public constructor
     }
-public Tab2(TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
+public Tab2(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
         this.cart_amout =cart_amout;
         this.items_total =items_total;
         this.bottomsheet=bottomsheet;
-        //this.foodModels=foodModels;
+        this.foodModels=foodModels;
 }
 
 public Tab2(ArrayList<FoodModel> foodModels){
@@ -112,6 +112,7 @@ public Tab2(ArrayList<FoodModel> foodModels){
         }
 
         // data yaha se aa raha hai
+/*
         getData.getalldata(nonveg, getContext(), new GetData.CallBack() {
             @Override
             public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
@@ -124,8 +125,14 @@ public Tab2(ArrayList<FoodModel> foodModels){
                 recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total,bottomsheet));
             }
         });
+*/
+
+        recyclerView= view.findViewById(R.id.biryanirecycler);
+        recyclerView.hasFixedSize();
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
 
+        recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
 
 
 
@@ -140,6 +147,11 @@ public Tab2(ArrayList<FoodModel> foodModels){
         super.onCreate(savedInstanceState);
      // noo need
 
+ /*       recyclerView= getView().findViewById(R.id.biryanirecycler);
+        recyclerView.hasFixedSize();
+        recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(),2));
 
+
+        recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));*/
     }
 }
