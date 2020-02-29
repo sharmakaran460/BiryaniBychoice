@@ -96,9 +96,6 @@ public Tab2(ArrayList<FoodModel> foodModels){
    view = inflater.inflate(R.layout.fragment_tab2,container,false);
 
 
-
-
-
         data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();

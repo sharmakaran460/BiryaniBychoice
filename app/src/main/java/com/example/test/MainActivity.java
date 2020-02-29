@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.BAckgrounddata.GetData;
+import com.example.test.ManageAddresses.ManageAddresses;
 import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dialog.setPositiveButton("Manage Address", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which ) {
-
+                        Intent i = new Intent(MainActivity.this , ManageAddresses.class);
+                        startActivity(i);
                     }
                 }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
                     @Override
