@@ -2,6 +2,7 @@ package com.example.test.BAckgrounddata;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -45,24 +46,37 @@ public class GetData {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
+                try
+                {
+                    Log.e("Responce",response);
                     System.out.println("in try catch............................");
                     JSONArray array = new JSONArray(response);
-                    for (int i =0; i< array.length();i++){
+                    for (int i =0; i< array.length();i++)
+                    {
                         FoodModel foodItem = new FoodModel();
                         JSONObject object = array.getJSONObject(i);
-                        foodItem.setFoodName(object.getString("food_name"));
+
+                        if(object.has("food_name"))
+                        {
+                            foodItem.setFoodName(object.getString("food_name"));
+                        }
+                        else
+                        {
+                            foodItem.setFoodName("");
+                        }
+                        foodItem.setFoodid(object.getInt("food_id"));
                         foodItem.setFoodCat(object.getString("food_cat"));
                         foodItem.setFoodDes(object.getString("food_desc"));
                         foodItem.setFoodPrice(object.getInt("food_price"));
                         foodItem.setFood_imag_url(object.getString("food_image_blob"));
-                      foodlists.add(foodItem);
+                         foodlists.add(foodItem);
                         foodItem.setFoodModelslist(foodlists);
 
 
 
                         if(object.getString("food_cat").equals("veg")){
                             FoodModel foodItemveg = new FoodModel();
+                            foodItemveg.setFoodid(object.getInt("food_id"));
                             foodItemveg.setFoodName(object.getString("food_name"));
                             foodItemveg.setFoodCat(object.getString("food_cat"));
                             foodItemveg.setFoodDes(object.getString("food_desc"));
@@ -72,6 +86,7 @@ public class GetData {
                         }
                         if (object.getString("food_cat").equals("nonveg") || object.getString("food_cat").equals("egg")){
                             FoodModel foodItemeggnon = new FoodModel();
+                            foodItemeggnon.setFoodid(object.getInt("food_id"));
                             foodItemeggnon.setFoodName(object.getString("food_name"));
                             foodItemeggnon.setFoodCat(object.getString("food_cat"));
                             foodItemeggnon.setFoodDes(object.getString("food_desc"));
@@ -85,7 +100,7 @@ public class GetData {
 
 
                     callBack.onSuccess(foodlists,foodlistsveg,foodlistsnonveg);
-                    setFoodModels(foodlists);
+                    setFoodModels(foodlist   s);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

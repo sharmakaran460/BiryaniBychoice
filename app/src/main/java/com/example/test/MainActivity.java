@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
+
+//need to be change--->
                 requestPerm();
 
 

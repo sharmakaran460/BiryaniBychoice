@@ -87,6 +87,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.food_desc.setText(food_list.get(position).getFoodDes());
         quintity[0] = food_list.get(position).getQuantity();
 
+        Log.e("food_id",food_list.get(position).getFoodid()+"");
+
 
         if(food_list.get(position).getFoodCat().equals("veg"))
         {
@@ -98,7 +100,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
         holder.add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 quintity[0] =  quintity[0]+1;
                 holder.counter_text.setText(String.valueOf(quintity[0]));
                 final long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
@@ -115,24 +118,30 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 }
 
 
-                toolbar.setTitle(food_list.get(position).getFoodName());
-                firstprice.setText(String.valueOf(food_list.get(position).getFoodPrice()));
-                dialog.show();
-
-                biryaniquantitybtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                            bottom_sheet_layout.setVisibility(View.VISIBLE);
+                bottom_sheet_layout.setVisibility(View.VISIBLE);
                             holder.linearLayout_btn.setVisibility(View.INVISIBLE);
                             holder.linearLayout.setVisibility(View.VISIBLE);
 
 
-                            dialog.dismiss();
 
-                        }
+              //  toolbar.setTitle(food_list.get(position).getFoodName());
+            //    firstprice.setText(String.valueOf(food_list.get(position).getFoodPrice()));
+            //    dialog.show();
 
-
-                });
+//                biryaniquantitybtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                            bottom_sheet_layout.setVisibility(View.VISIBLE);
+//                            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
+//                            holder.linearLayout.setVisibility(View.VISIBLE);
+//
+//
+//                            dialog.dismiss();
+//
+//                        }
+//
+//
+//                });
 
 
 
@@ -155,7 +164,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
                 //     long result =   data_base.save_cart_value(food_list.get(position).getFood_id(),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(food_list.get(position).getQuantity()));
 
-                if(result>0)
+
                     if(result>0)
                     {
                         String amount =  data_base.get_the_total_amount();

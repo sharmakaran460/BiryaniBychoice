@@ -67,7 +67,7 @@ public class Tab1 extends Fragment {
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottom_sheet_layout =bottom_sheet_layout;
-        this.foodlists=foodModels;
+        this.foodlists = foodModels;
     }
 
     @Override
