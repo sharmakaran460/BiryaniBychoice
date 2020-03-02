@@ -33,7 +33,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:textColor="#1B1A1A"
-            android:textSize="14dp"
+            android:textSize="16dp"
 
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 style="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#1B1A1A"
-            android:textSize="14dp"
+            android:textSize="16dp"
 
             android:layout_width="wrap_content"
             android:layout_height="35dp"/>
@@ -95,7 +95,7 @@
                         android:gravity="center_vertical"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="#1B1A1A"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
                         android:text="VIEW CART"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"/>
@@ -119,9 +119,10 @@
             <TextView
                 android:fontFamily="@font/raleway_bold"
                 android:gravity="center_vertical"
-                style="@style/TextAppearance.AppCompat.Body2"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="#1B1A1A"
-                android:textSize="10dp"
+                android:textStyle="bold"
+                android:textSize="13dp"
                 android:text="From: Biryani by choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

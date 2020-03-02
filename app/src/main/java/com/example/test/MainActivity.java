@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView cart_amount,items_total;
     LinearLayout bottomsheet;
     ArrayList<FoodModel> foodModels;
-    final String url="http://61.247.229.49:8082/biryaniweb/food";
+    final String url="http://182.68.9.8:8081/biryaniweb/food";
 
 
     Location loc;

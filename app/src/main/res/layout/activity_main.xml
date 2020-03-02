@@ -52,6 +52,7 @@
                 android:background="#222222"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:tabGravity="fill"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 app:tabIndicatorColor="@color/colorPrimary"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/colorPrimary" />
