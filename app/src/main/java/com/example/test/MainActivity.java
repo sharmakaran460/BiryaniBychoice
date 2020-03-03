@@ -26,11 +26,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,10 +62,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private EditText locText;
     private ImageButton manageAddress;
-    TextView cart_amount,items_total;
+    Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
+
+    TextView cart_amount,items_total, add_new_serv_name;
     LinearLayout bottomsheet;
+    RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
-    final String url="http://182.68.9.8:8081/biryaniweb/food";
+    final String url="http://61.247.229.49:8082/biryaniweb/food";
 
 
     Location loc;
@@ -80,11 +84,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cart_amount = findViewById(R.id.cart_amout);
         items_total=findViewById(R.id.items_total);
         bottomsheet =findViewById(R.id.bottom_sheet);
+        add_new_serving_layout= findViewById(R.id.bottom_sheet_add_new_serv_layout);
 
         manageAddress =findViewById(R.id.locationButton);
         toolbar = findViewById(R.id.toolbar);
         locText =findViewById(R.id.locationText);
         client = LocationServices.getFusedLocationProviderClient(this);
+        add_new_serv_btn=findViewById(R.id.add_new_serving_btn);
+        repeat_last_serv_btn=findViewById(R.id.repeat_last_serving_btn);
+        close_new_serv_layout_btn=findViewById(R.id.close_new_serv_layout_btn);
+        add_new_serv_name=findViewById(R.id.serving_food_name);
 
 
 
@@ -117,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        tabbar = findViewById(R.id.tab);
+
+        tabbar = findViewById(R.id.tab_layout);
+
         viewPager = findViewById(R.id.view_pager);
 
         //calling navigation view for the click listners
@@ -133,9 +144,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 foodModels=foodModelsAll;
                 //For Tab view this View pager can be used
                 ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-                viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet), "All");
-                viewPagerAdapter.addfragment(new Tab2(foodModelsveg,cart_amount,items_total,bottomsheet), "Veg");
-                viewPagerAdapter.addfragment(new BlankFragment(foodModelsegnon,cart_amount,items_total,bottomsheet), "Nonveg");
+                viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet,add_new_serving_layout,
+                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name), "All");
+                viewPagerAdapter.addfragment(new Tab2(foodModelsveg,cart_amount,items_total,bottomsheet, add_new_serving_layout,
+                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name), "Veg");
+                viewPagerAdapter.addfragment(new BlankFragment(foodModelsegnon,cart_amount,items_total,bottomsheet,
+                        add_new_serving_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,add_new_serv_name), "Nonveg");
 
                 viewPager.setAdapter(viewPagerAdapter);
                 tabbar.setupWithViewPager(viewPager);
@@ -143,11 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-
-
         setupToolbar();
-
-
     }
     public void requestPerm(){
         if( ActivityCompat.checkSelfPermission(MainActivity.this,ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){

@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -54,26 +56,30 @@ public class BlankFragment extends Fragment {
     View view;
     //final ArrayList<FoodModel> foodModels=new ArrayList<>();
     ArrayList<FoodModel> combolist = new ArrayList<>();
-    TextView cart_amout;
-    TextView items_total;
+    TextView cart_amout,items_total, add_new_serv_name;
     DatabaseHelper data_base;
     LinearLayout bottomsheet;
     GetData getData=new GetData();
-    String eggurl="http://61.247.229.49:8082/biryaniweb/food/cat/eggnon";
+    RelativeLayout add_new_srv_layout;
+    Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
 
     public BlankFragment() {
         // Required empty public constructor
     }
 
-    public BlankFragment(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,LinearLayout bottomsheet ){
+    public BlankFragment(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,
+                         LinearLayout bottomsheet, RelativeLayout add_new_srv_layout,
+                         Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottomsheet=bottomsheet;
         this.combolist =foodModels;
-
+        this.add_new_srv_layout=add_new_srv_layout;
+        this.add_new_serv_btn=add_new_serv_btn;
+        this.repeat_last_serv_btn=repeat_last_serv_btn;
+        this.close_new_serv_layout_btn=close_new_serv_layout_btn;
+        this.add_new_serv_name=add_new_serv_name;
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,12 +88,7 @@ public class BlankFragment extends Fragment {
         // Inflate the layout for this fragment
        view = inflater.inflate(R.layout.fragment_blank, container, false);
 
-        /*cart_amout = view.findViewById(R.id.cart_amout);
-        items_total=view.findViewById(R.id.items_total);
-        bottomsheet =view.findViewById(R.id.bottom_sheet);*/
         getData=new GetData();
-
-
         data_base=new DatabaseHelper(getActivity());
         String amount =  data_base.get_the_total_amount();
         String quantity = data_base. get_the_total_quantity();
@@ -100,26 +101,12 @@ public class BlankFragment extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-/*        //data yaha se aa raha hai
-        getData.getalldata(eggurl, getContext(), new GetData.CallBack() {
-            @Override
-            public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
-                RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-
-                recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total,bottomsheet));
-            }
-        });*/
-
-
-
-       // recyclerView.addItemDecoration(new SpacesItemDecoration(8));
         RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
-        recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet));
+        recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet,
+                add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn, add_new_serv_name));
 
 
         return view;
@@ -128,7 +115,7 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// koi jarurat nai hai teri
+
 
     }
 }

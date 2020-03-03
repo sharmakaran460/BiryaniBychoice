@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,22 +61,31 @@ public class Tab2 extends Fragment {
      View view;
     ArrayList<NonVegBiryani> biryaniList = new ArrayList<>();
    ArrayList<FoodModel> foodModels=new ArrayList<>();
-    TextView cart_amout;
-    TextView items_total;
+    TextView cart_amout, items_total, add_new_serv_name;
     DatabaseHelper data_base;
     LinearLayout bottomsheet;
+    RelativeLayout add_new_serv_layout;
     GetData getData=new GetData();
-    String nonveg="http://61.247.229.49:8082/biryaniweb/food/cat/veg";
     RecyclerView recyclerView;
+    Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
+
 
     public Tab2() {
         // Required empty public constructor
     }
-public Tab2(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total ,LinearLayout bottomsheet){
+public Tab2(ArrayList<FoodModel> foodModels, TextView cart_amout, TextView items_total,
+            LinearLayout bottomsheet, RelativeLayout add_new_serv_layout,
+            Button add_new_serv_btn,Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name){
         this.cart_amout =cart_amout;
         this.items_total =items_total;
         this.bottomsheet=bottomsheet;
         this.foodModels=foodModels;
+        this.add_new_serv_layout=add_new_serv_layout;
+        this.add_new_serv_btn=add_new_serv_btn;
+        this.repeat_last_serv_btn=repeat_last_serv_btn;
+        this.close_new_serv_layout_btn=close_new_serv_layout_btn;
+        this.add_new_serv_name=add_new_serv_name;
+
 }
 
 public Tab2(ArrayList<FoodModel> foodModels){
@@ -108,47 +119,16 @@ public Tab2(ArrayList<FoodModel> foodModels){
             items_total.setText(""+quantity+" Item");
         }
 
-        // data yaha se aa raha hai
-/*
-        getData.getalldata(nonveg, getContext(), new GetData.CallBack() {
-            @Override
-            public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
-
-                recyclerView= view.findViewById(R.id.biryanirecycler);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-
-
-                recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total,bottomsheet));
-            }
-        });
-*/
-
         recyclerView= view.findViewById(R.id.biryanirecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-
-
-        recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));
-
-
-
-
-
+        recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet,
+                add_new_serv_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name));
    return view;
     }
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-     // noo need
 
- /*       recyclerView= getView().findViewById(R.id.biryanirecycler);
-        recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(),2));
-
-
-        recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet));*/
     }
 }

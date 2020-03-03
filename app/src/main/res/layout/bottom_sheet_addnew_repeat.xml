@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_add_new_serv_layout"
+    android:background="@color/colorPrimaryDark"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:elevation="5sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serving_food_name"
+            android:layout_margin="4sp"
+            android:hint="Food Name"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:textSize="20sp"
+            android:fontFamily="@font/raleway_bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:text="Reapeat Last used  customization ?"
+            style="@style/TextAppearance.MaterialComponents.Body2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:text="Size: "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="Serving size"
+                android:id="@+id/item_serving"/>
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:elevation="4sp">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+        android:id="@+id/add_new_serving_btn"
+        android:layout_weight="1"
+        android:elevation="5sp"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:text="Add new"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Reapeat Last"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:id="@+id/repeat_last_serving_btn"
+        android:elevation="5sp"/>
+</LinearLayout>
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/close_new_serv_layout_btn"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_close_black_24dp"
+        />
+
+
+</RelativeLayout>

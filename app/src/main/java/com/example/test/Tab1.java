@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,11 +52,13 @@ public class Tab1 extends Fragment {
         View view;
     static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
     ArrayList<FoodModel> foodlists=new ArrayList<>();
-    TextView cart_amout;
-    TextView items_total;
+    TextView cart_amout,items_total, add_new_serv_name;
+
     DatabaseHelper data_base;
     LinearLayout bottom_sheet_layout;
     GetData getData=new GetData();
+    RelativeLayout add_new_serv_layout;
+    Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
 
 
 
@@ -63,11 +66,18 @@ public class Tab1 extends Fragment {
     public Tab1() {
         // Required empty public constructor
     }
-    public  Tab1(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,LinearLayout bottom_sheet_layout){
+    public  Tab1(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,
+                 LinearLayout bottom_sheet_layout, RelativeLayout add_new_serv_layout,
+                 Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottom_sheet_layout =bottom_sheet_layout;
         this.foodlists = foodModels;
+        this.add_new_serv_layout=add_new_serv_layout;
+        this.add_new_serv_btn=add_new_serv_btn;
+        this.repeat_last_serv_btn=repeat_last_serv_btn;
+        this.close_new_serv_layout_btn=close_new_serv_layout_btn;
+        this.add_new_serv_name=add_new_serv_name;
     }
 
     @Override
@@ -86,39 +96,18 @@ public class Tab1 extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-
-/*
-        getData.getalldata(Url, getContext(), new GetData.CallBack() {
-            @Override
-            public void onSuccess(ArrayList<FoodModel> foodModelsAll) {
-                RecyclerView recyclerView= view.findViewById(R.id.layout);
-                recyclerView.hasFixedSize();
-                recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-                recyclerView.setAdapter(new NewCardAdapter(foodModelsAll,getContext(),cart_amout,items_total));
-            }
-        });
-*/
         RecyclerView recyclerView= view.findViewById(R.id.layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
-        recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout));
-
-
-
-         return view;
+        recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout,
+                add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name));
+        return view;
 
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        // no need
-
-
-
     }
-
-
-
 }
 

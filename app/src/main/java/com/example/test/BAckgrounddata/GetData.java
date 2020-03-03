@@ -48,7 +48,7 @@ public class GetData {
             public void onResponse(String response) {
                 try
                 {
-                    Log.e("Responce",response);
+
                     System.out.println("in try catch............................");
                     JSONArray array = new JSONArray(response);
                     for (int i =0; i< array.length();i++)
@@ -100,7 +100,7 @@ public class GetData {
 
 
                     callBack.onSuccess(foodlists,foodlistsveg,foodlistsnonveg);
-                    setFoodModels(foodlist   s);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
