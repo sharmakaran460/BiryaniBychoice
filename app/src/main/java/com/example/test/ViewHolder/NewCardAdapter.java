@@ -33,7 +33,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     ArrayList<FoodModel> food_list;
     DatabaseHelper data_base;
     Context context;
-    TextView cart_amout,items_total ,firstprice,secondprice,thirdprice, add_new_serv_name;
+    TextView cart_amout,items_total ,firstprice,secondprice,thirdprice, add_new_serv_name,add_new_serving_size;
     LinearLayout bottom_sheet_layout;
     Toolbar toolbar;
     Button biryaniquantitybtn;
@@ -47,7 +47,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                           TextView cart_amout, TextView items_total,
                           LinearLayout bottom_sheet_layout, RelativeLayout add_new_serv_layout,
                           Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn,
-                          TextView add_new_serv_name) {
+                          TextView add_new_serv_name,TextView add_new_serving_size) {
         this.food_list = food_list;
         this.context = context;
         this.cart_amout = cart_amout;
@@ -59,6 +59,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.repeat_last_serv_btn=repeat_last_serv_btn;
         this.close_new_serv_layout_btn=close_new_serv_layout_btn;
         this.add_new_serv_name=add_new_serv_name;
+        this.add_new_serving_size=add_new_serving_size;
 
     }
 
@@ -154,6 +155,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 biryaniquantitybtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         quintity[0]=quintity[0]+1;
                         holder.counter_text.setText(String.valueOf(quintity[0]));
                         long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),
@@ -197,6 +199,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
             public void onClick(View v) {
 
                 add_new_serv_name.setText(food_list.get(position).getFoodName());
+               add_new_serving_size.setText("serving 1");
 
                 if(quintity[0]>0)
                 {

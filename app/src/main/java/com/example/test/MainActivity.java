@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageButton manageAddress;
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
 
-    TextView cart_amount,items_total, add_new_serv_name;
+    TextView cart_amount,items_total, add_new_serv_name,add_new_serving_size;
     LinearLayout bottomsheet;
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         repeat_last_serv_btn=findViewById(R.id.repeat_last_serving_btn);
         close_new_serv_layout_btn=findViewById(R.id.close_new_serv_layout_btn);
         add_new_serv_name=findViewById(R.id.serving_food_name);
+        add_new_serving_size=findViewById(R.id.item_serving);
 
 
 
@@ -145,12 +146,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //For Tab view this View pager can be used
                 ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
                 viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet,add_new_serving_layout,
-                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name), "All");
+                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size), "All");
                 viewPagerAdapter.addfragment(new Tab2(foodModelsveg,cart_amount,items_total,bottomsheet, add_new_serving_layout,
-                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name), "Veg");
+                        add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size), "Veg");
                 viewPagerAdapter.addfragment(new BlankFragment(foodModelsegnon,cart_amount,items_total,bottomsheet,
-                        add_new_serving_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,add_new_serv_name), "Nonveg");
+                        add_new_serving_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,add_new_serv_name,add_new_serving_size), "Nonveg");
 
+                viewPagerAdapter.addfragment(new Italian_fragment(),"Italiano");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabbar.setupWithViewPager(viewPager);
             }

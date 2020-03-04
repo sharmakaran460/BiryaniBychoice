@@ -56,7 +56,7 @@ public class BlankFragment extends Fragment {
     View view;
     //final ArrayList<FoodModel> foodModels=new ArrayList<>();
     ArrayList<FoodModel> combolist = new ArrayList<>();
-    TextView cart_amout,items_total, add_new_serv_name;
+    TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size;
     DatabaseHelper data_base;
     LinearLayout bottomsheet;
     GetData getData=new GetData();
@@ -69,7 +69,7 @@ public class BlankFragment extends Fragment {
 
     public BlankFragment(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,
                          LinearLayout bottomsheet, RelativeLayout add_new_srv_layout,
-                         Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name){
+                         Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name,TextView add_new_serving_size){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottomsheet=bottomsheet;
@@ -79,6 +79,7 @@ public class BlankFragment extends Fragment {
         this.repeat_last_serv_btn=repeat_last_serv_btn;
         this.close_new_serv_layout_btn=close_new_serv_layout_btn;
         this.add_new_serv_name=add_new_serv_name;
+        this.add_new_serving_size=add_new_serving_size;
     }
 
     @Override
@@ -106,7 +107,7 @@ public class BlankFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
         recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet,
-                add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn, add_new_serv_name));
+                add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size));
 
 
         return view;
