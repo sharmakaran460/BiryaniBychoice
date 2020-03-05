@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout bottomsheet;
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
-    final String url="http://122.162.141.227:8081/biryaniweb/food";
+    final String url="http://61.247.229.49:8082/biryaniwebs/food";
 
 
     Location loc;

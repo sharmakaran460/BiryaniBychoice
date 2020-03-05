@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.test.Model.CartModal;
 import com.example.test.Model.FoodModel;
 import com.example.test.R;
 import com.example.test.Sqldirectory.DatabaseHelper;
@@ -41,6 +42,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     RadioButton btn1,btn2,btn3;
     RelativeLayout add_new_serv_layout;
     Button add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn;
+    ArrayList<CartModal> cartModalArrayList=new ArrayList<>();
 
 
     public NewCardAdapter(ArrayList<FoodModel> food_list, Context context,
@@ -61,6 +63,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.add_new_serv_name=add_new_serv_name;
         this.add_new_serving_size=add_new_serving_size;
         this.bottom_sheet_view_cart_btn=bottom_sheet_view_cart_btn;
+
 
     }
 

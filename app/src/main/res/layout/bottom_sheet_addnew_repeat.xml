@@ -4,7 +4,7 @@
     android:layout_height="140sp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_add_new_serv_layout"
-    android:background="@color/colorPrimaryDark"
+    android:background="@android:color/white"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:padding="8dp">
 
@@ -52,10 +52,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@drawable/add_new_bottom_sheet"
+        android:textColor="#2e86c1"
         android:outlineAmbientShadowColor="@color/colorPrimaryDark"
         android:id="@+id/add_new_serving_btn"
         android:layout_weight="1"
+        android:layout_margin="2sp"
         android:elevation="5sp"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:text="Add new"/>
@@ -63,6 +65,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_margin="2sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/repeate_btn_bottom_sheet"
         android:text="Reapeat Last"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:id="@+id/repeat_last_serving_btn"
