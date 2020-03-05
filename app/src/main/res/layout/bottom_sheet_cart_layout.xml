@@ -98,7 +98,8 @@
                         android:textSize="16dp"
                         android:text="VIEW CART"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"/>
+                        android:layout_height="35dp"
+                        android:id="@+id/bottom_sheet_view_cart_btn"/>
 
 
                     <ImageView

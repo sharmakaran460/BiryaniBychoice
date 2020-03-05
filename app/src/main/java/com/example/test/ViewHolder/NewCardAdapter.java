@@ -33,7 +33,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     ArrayList<FoodModel> food_list;
     DatabaseHelper data_base;
     Context context;
-    TextView cart_amout,items_total ,firstprice,secondprice,thirdprice, add_new_serv_name,add_new_serving_size;
+    TextView cart_amout,items_total ,firstprice,secondprice,thirdprice, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
     LinearLayout bottom_sheet_layout;
     Toolbar toolbar;
     Button biryaniquantitybtn;
@@ -47,7 +47,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                           TextView cart_amout, TextView items_total,
                           LinearLayout bottom_sheet_layout, RelativeLayout add_new_serv_layout,
                           Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn,
-                          TextView add_new_serv_name,TextView add_new_serving_size) {
+                          TextView add_new_serv_name,TextView add_new_serving_size, TextView bottom_sheet_view_cart_btn) {
         this.food_list = food_list;
         this.context = context;
         this.cart_amout = cart_amout;
@@ -60,6 +60,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.close_new_serv_layout_btn=close_new_serv_layout_btn;
         this.add_new_serv_name=add_new_serv_name;
         this.add_new_serving_size=add_new_serving_size;
+        this.bottom_sheet_view_cart_btn=bottom_sheet_view_cart_btn;
 
     }
 
@@ -111,7 +112,13 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
 
 
+bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
 
+
+    }
+});
 
         if(food_list.get(position).getFoodCat().equals("veg"))
         {
@@ -150,6 +157,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
                 toolbar.setTitle(food_list.get(position).getFoodName());
                 firstprice.setText(String.valueOf(food_list.get(position).getFoodPrice()));
+                secondprice.setText(String.valueOf(food_list.get(position).getMedium_serving_price()));
+                thirdprice.setText(String.valueOf(food_list.get(position).getLarge_serving_price()));
                 dialog.show();
 
                 biryaniquantitybtn.setOnClickListener(new View.OnClickListener() {
@@ -297,13 +306,33 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                 Log.e("Result Sub",quintity[0]+"");
             }
         });
+if(food_list.get(position).getImage()!=null){
+    try{
+        holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(food_list.get(position).getImage(),0,food_list.get(position).getImage().length));
+    }catch (Exception e)
+    {
+        e.printStackTrace();
+    }
+}
+else if(food_list.get(position).getFoodName().equals("Handi pasta"))
+{
+    holder.imageView.setImageResource(R.drawable.pasta);
+}
+else  if(food_list.get(position).getFoodName().equals("Chicken Cheese Pizza"))
+{
+    holder.imageView.setImageResource(R.drawable.chickenpasta);
+}
+else  if(food_list.get(position).getFoodName().equals("Chicken Tikka"))
+{
+    holder.imageView.setImageResource(R.drawable.chickentikka);
+}
+else  if(food_list.get(position).getFoodName().equals("Sahi Paneer"))
+{
+    holder.imageView.setImageResource(R.drawable.shahipaneer);
+}
+else {
 
-        try{
-            holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(food_list.get(position).getImage(),0,food_list.get(position).getImage().length));
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+}
 
     }
 

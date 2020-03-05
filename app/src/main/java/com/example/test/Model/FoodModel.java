@@ -14,6 +14,24 @@ public class FoodModel {
 int quantity;
     byte[] image;
     int foodPrice;
+    int medium_serving_price;
+    int large_serving_price;
+
+    public int getMedium_serving_price() {
+        return medium_serving_price;
+    }
+
+    public void setMedium_serving_price(int medium_serving_price) {
+        this.medium_serving_price = medium_serving_price;
+    }
+
+    public int getLarge_serving_price() {
+        return large_serving_price;
+    }
+
+    public void setLarge_serving_price(int large_serving_price) {
+        this.large_serving_price = large_serving_price;
+    }
 
     ArrayList<FoodModel> foodModelslist ;
 

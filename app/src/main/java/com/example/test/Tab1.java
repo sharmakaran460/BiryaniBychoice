@@ -52,7 +52,7 @@ public class Tab1 extends Fragment {
         View view;
     static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
     ArrayList<FoodModel> foodlists=new ArrayList<>();
-    TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size;
+    TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
 
     DatabaseHelper data_base;
     LinearLayout bottom_sheet_layout;
@@ -68,7 +68,8 @@ public class Tab1 extends Fragment {
     }
     public  Tab1(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,
                  LinearLayout bottom_sheet_layout, RelativeLayout add_new_serv_layout,
-                 Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name,TextView add_new_serving_size){
+                 Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn,
+                 TextView add_new_serv_name,TextView add_new_serving_size,TextView bottom_sheet_view_cart_btn){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottom_sheet_layout =bottom_sheet_layout;
@@ -79,6 +80,7 @@ public class Tab1 extends Fragment {
         this.close_new_serv_layout_btn=close_new_serv_layout_btn;
         this.add_new_serv_name=add_new_serv_name;
         this.add_new_serving_size=add_new_serving_size;
+        this.bottom_sheet_view_cart_btn=bottom_sheet_view_cart_btn;
     }
 
     @Override
@@ -101,7 +103,8 @@ public class Tab1 extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout,
-                add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size));
+                add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
         return view;
 
     }

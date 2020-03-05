@@ -56,7 +56,7 @@ public class BlankFragment extends Fragment {
     View view;
     //final ArrayList<FoodModel> foodModels=new ArrayList<>();
     ArrayList<FoodModel> combolist = new ArrayList<>();
-    TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size;
+    TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size,bottom_sheet_view_cart_btn;
     DatabaseHelper data_base;
     LinearLayout bottomsheet;
     GetData getData=new GetData();
@@ -69,7 +69,8 @@ public class BlankFragment extends Fragment {
 
     public BlankFragment(ArrayList<FoodModel> foodModels,TextView cart_amout,TextView items_total,
                          LinearLayout bottomsheet, RelativeLayout add_new_srv_layout,
-                         Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn, TextView add_new_serv_name,TextView add_new_serving_size){
+                         Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn,
+                         TextView add_new_serv_name,TextView add_new_serving_size, TextView bottom_sheet_view_cart_btn){
         this.cart_amout =cart_amout;
         this.items_total=items_total;
         this.bottomsheet=bottomsheet;
@@ -80,6 +81,7 @@ public class BlankFragment extends Fragment {
         this.close_new_serv_layout_btn=close_new_serv_layout_btn;
         this.add_new_serv_name=add_new_serv_name;
         this.add_new_serving_size=add_new_serving_size;
+        this.bottom_sheet_view_cart_btn=bottom_sheet_view_cart_btn;
     }
 
     @Override
@@ -107,7 +109,8 @@ public class BlankFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
         recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet,
-                add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size));
+                add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn,
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
 
 
         return view;

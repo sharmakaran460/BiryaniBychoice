@@ -43,6 +43,7 @@ public class GetData {
         final  ArrayList<FoodModel> foodlists=new ArrayList<>();
         final  ArrayList<FoodModel> foodlistsveg=new ArrayList<>();
         final  ArrayList<FoodModel> foodlistsnonveg=new ArrayList<>();
+        final ArrayList<FoodModel> foodlistnorthindian = new ArrayList<>();
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -68,38 +69,54 @@ public class GetData {
                         foodItem.setFoodCat(object.getString("food_cat"));
                         foodItem.setFoodDes(object.getString("food_desc"));
                         foodItem.setFoodPrice(object.getInt("food_price"));
+                        foodItem.setMedium_serving_price(object.getInt("medium_serving_price"));
+                        foodItem.setLarge_serving_price(object.getInt("large_serving_price"));
                         foodItem.setFood_imag_url(object.getString("food_image_blob"));
                          foodlists.add(foodItem);
                         foodItem.setFoodModelslist(foodlists);
 
 
 
-                        if(object.getString("food_cat").equals("veg")){
+                        if(object.getString("food_type").equals("biryani")){
                             FoodModel foodItemveg = new FoodModel();
                             foodItemveg.setFoodid(object.getInt("food_id"));
                             foodItemveg.setFoodName(object.getString("food_name"));
                             foodItemveg.setFoodCat(object.getString("food_cat"));
                             foodItemveg.setFoodDes(object.getString("food_desc"));
                             foodItemveg.setFoodPrice(object.getInt("food_price"));
+                            foodItemveg.setMedium_serving_price(object.getInt("medium_serving_price"));
+                            foodItemveg.setLarge_serving_price(object.getInt("large_serving_price"));
                             foodItemveg.setFood_imag_url(object.getString("food_image_blob"));
                             foodlistsveg.add(foodItemveg);
                         }
-                        if (object.getString("food_cat").equals("nonveg") || object.getString("food_cat").equals("egg")){
+                        if (object.getString("food_type").equals("italian")){
                             FoodModel foodItemeggnon = new FoodModel();
                             foodItemeggnon.setFoodid(object.getInt("food_id"));
                             foodItemeggnon.setFoodName(object.getString("food_name"));
                             foodItemeggnon.setFoodCat(object.getString("food_cat"));
                             foodItemeggnon.setFoodDes(object.getString("food_desc"));
                             foodItemeggnon.setFoodPrice(object.getInt("food_price"));
+                            foodItemeggnon.setMedium_serving_price(object.getInt("medium_serving_price"));
+                            foodItemeggnon.setLarge_serving_price(object.getInt("large_serving_price"));
                             foodItemeggnon.setFood_imag_url(object.getString("food_image_blob"));
                             foodlistsnonveg.add(foodItemeggnon);
+                        }
+                        if (object.getString("food_type").equals("northindian")){
+                            FoodModel foodItemnorthindaian = new FoodModel();
+                            foodItemnorthindaian.setFoodid(object.getInt("food_id"));
+                            foodItemnorthindaian.setFoodName(object.getString("food_name"));
+                            foodItemnorthindaian.setFoodCat(object.getString("food_cat"));
+                            foodItemnorthindaian.setFoodDes(object.getString("food_desc"));
+                            foodItemnorthindaian.setFoodPrice(object.getInt("food_price"));
+                            foodItemnorthindaian.setFood_imag_url(object.getString("food_image_blob"));
+                            foodlistnorthindian.add(foodItemnorthindaian);
                         }
 
 
                     }
 
 
-                    callBack.onSuccess(foodlists,foodlistsveg,foodlistsnonveg);
+                    callBack.onSuccess(foodlists,foodlistsveg,foodlistsnonveg, foodlistnorthindian);
 
 
                 } catch (JSONException e) {
@@ -118,7 +135,7 @@ public class GetData {
 
  // public void getAlldata()
   public interface CallBack{
-      void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon);
+      void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon, ArrayList<FoodModel> foodlistnorthindian);
   }
 
 }
