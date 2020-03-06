@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.test.Model.CartModal;
 import com.example.test.Model.FoodModel;
 import com.example.test.R;
@@ -107,12 +108,6 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.food_price.setText(String.valueOf(food_list.get(position).getFoodPrice()));
         holder.food_desc.setText(food_list.get(position).getFoodDes());
         quintity[0] = food_list.get(position).getQuantity();
-
-
-
-
-
-
 
 
 bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {

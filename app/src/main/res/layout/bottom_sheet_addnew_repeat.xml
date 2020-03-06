@@ -54,7 +54,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/add_new_bottom_sheet"
         android:textColor="#2e86c1"
-        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
         android:id="@+id/add_new_serving_btn"
         android:layout_weight="1"
         android:layout_margin="2sp"
