@@ -11,6 +11,7 @@
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:id="@+id/cover_profile_lay">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -18,24 +19,43 @@
             android:background="@drawable/biryaniimage"
 
             />
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-
-            android:id="@+id/profile_pic"
-          android:src="@drawable/biryaniimage"
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/colorPrimaryDark"
+            android:id="@+id/toolbar"
+            android:background="@color/fbutton_color_transparent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:elevation="12sp"
+            android:id="@+id/cardprofile"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            app:civ_border_color="#EEEEEE"
-            app:civ_border_width="4dp"
-            app:civ_shadow="true"
-            app:civ_shadow_radius="10"
-            app:civ_shadow_color="#8BC34A"/>
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5sp"
+            app:cardCornerRadius="40sp"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:src="@drawable/biryaniimage"
+                android:scaleType="centerCrop"
+                android:id="@+id/profile_pic"/>
 
-
-
-
-
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Name"
+            android:padding="10sp"
+            android:layout_marginLeft="20sp"
+            android:layout_toRightOf="@+id/cardprofile"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/customername"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="24sp"
+            android:layout_gravity="end"/>
 
     </RelativeLayout>
 
@@ -53,12 +73,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
             <Button
                 android:layout_width="50sp"
                 android:layout_height="30sp"
                 android:text="Edit"
+                android:background="@drawable/repeate_btn_bottom_sheet"
                 android:id="@+id/editProfile"
                 android:textSize="10sp"
                 android:layout_gravity="center"/>
@@ -70,25 +89,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer Name"
-                android:padding="10sp"
-                android:id="@+id/customername"
-                android:fontFamily="@font/raleway_bold"
-                android:textSize="24sp"
-                android:layout_marginRight="10sp"
-                android:layout_gravity="end"/>
+
            <Button
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:id="@+id/btn_myOrders"
-               android:textColor="@android:color/white"
-               android:fontFamily="@font/raleway_bold"
-               android:padding="7sp"
-               android:background="@drawable/mordersprofilebtn"
-               android:text="My Orders" android:layout_gravity="end"/>
+               android:textColor="#2e86c1"
+               android:layout_margin="2sp"
+               android:elevation="4sp"
+               style="@style/TextAppearance.MaterialComponents.Body1"
+               android:background="@drawable/add_new_bottom_sheet"
+               android:text="My Orders"
+               android:layout_gravity="end"/>
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -114,8 +127,7 @@
                 android:text="Photos"
                 android:layout_weight="1"
                 android:id="@+id/photos"
-                android:padding="20sp"
-                android:background="@drawable/otplayout"/>
+                android:padding="20sp" />
 
         </TableRow>
         <TextView

@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
@@ -39,6 +40,7 @@ import com.example.test.BAckgrounddata.GetData;
 import com.example.test.ManageAddresses.ManageAddresses;
 import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,6 +58,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private ShimmerFrameLayout mShimmerViewContainer;
     private FusedLocationProviderClient client;
     private TabLayout tabbar;
     private ViewPager viewPager;
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         cart_amount = findViewById(R.id.cart_amout);
         items_total=findViewById(R.id.items_total);
         bottomsheet =findViewById(R.id.bottom_sheet);
@@ -136,14 +139,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //calling navigation view for the click listners
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mShimmerViewContainer.startShimmerAnimation();
 
 
         GetData data = new GetData();
         data.getalldata(url, getApplicationContext(), new GetData.CallBack() {
             @Override
             public void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon, ArrayList<FoodModel> foodlist_northindian) {
-
-                foodModels=foodModelsAll;
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                 //For Tab view this View pager can be used
                 ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
                 viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet,add_new_serving_layout,
@@ -167,6 +171,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setupToolbar();
     }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mShimmerViewContainer.stopShimmerAnimation();
+    }
+
     public void requestPerm(){
         if( ActivityCompat.checkSelfPermission(MainActivity.this,ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{ACCESS_FINE_LOCATION},1);

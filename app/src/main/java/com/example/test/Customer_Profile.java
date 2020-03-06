@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.OrderCart.Myorders;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 public class Customer_Profile extends AppCompatActivity {
 TextView name ,review ,pohto;
@@ -31,8 +32,8 @@ Toolbar toolbar;
         pohto = findViewById(R.id.photos);
         myorders = findViewById(R.id.btn_myOrders);
         edit = findViewById(R.id.editProfile);
-        profilePic = findViewById(R.id.prodilepic);
-        toolbar = findViewById(R.id.profiletoolbar);
+      /*  profilePic = findViewById(R.id.prodilepic);*/
+        toolbar = findViewById(R.id.toolbar);
 
         myorders.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +43,7 @@ Toolbar toolbar;
             }
         });
 
-        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
