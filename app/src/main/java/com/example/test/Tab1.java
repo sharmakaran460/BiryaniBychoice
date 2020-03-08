@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 
@@ -51,8 +54,10 @@ import java.util.ArrayList;
  */
 public class Tab1 extends Fragment {
         View view;
-    static  String   Url ="http://61.247.229.49:8082/biryaniweb/food/";
+    static  String   Url ="http://192.168.1.7:8080/biryaniweb/food/";
     ArrayList<FoodModel> foodlists=new ArrayList<>();
+    SwipeRefreshLayout pulltorefresh;
+    String tag = "Tab1.class";
     TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
 
     DatabaseHelper data_base;
@@ -106,13 +111,15 @@ public class Tab1 extends Fragment {
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout,
                 add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,
                 add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
+
         return view;
 
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
+
     }
 }
 

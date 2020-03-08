@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
@@ -69,9 +70,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     TextView cart_amount,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
     LinearLayout bottomsheet;
+    SwipeRefreshLayout pulltorefresh;
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
-    final String url="http://61.247.229.49:8082/biryaniwebs/food";
+    final String url="http://122.160.81.156:8081/biryaniweb/food";
 
 
     Location loc;
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pulltorefresh = findViewById(R.id.pulltorefresh);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         cart_amount = findViewById(R.id.cart_amout);
         items_total=findViewById(R.id.items_total);
@@ -170,6 +174,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         setupToolbar();
+        pulltorefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                GetData data = new GetData();
+                data.getalldata(url, getApplicationContext(), new GetData.CallBack() {
+                    @Override
+                    public void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon, ArrayList<FoodModel> foodlist_northindian) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        //For Tab view this View pager can be used
+                        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                        viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet,add_new_serving_layout,
+                                add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size,
+                                bottom_sheet_view_cart_btn), "All");
+                        viewPagerAdapter.addfragment(new Tab2(foodModelsveg,cart_amount,items_total,bottomsheet, add_new_serving_layout,
+                                add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size,
+                                bottom_sheet_view_cart_btn), "Biryani");
+                        viewPagerAdapter.addfragment(new BlankFragment(foodModelsegnon,cart_amount,items_total,bottomsheet,
+                                add_new_serving_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,add_new_serv_name,add_new_serving_size,
+                                bottom_sheet_view_cart_btn), "Italian");
+
+                        viewPagerAdapter.addfragment(new Italian_fragment(foodlist_northindian,cart_amount,items_total,bottomsheet,add_new_serving_layout,
+                                add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size,
+                                bottom_sheet_view_cart_btn),"North indian");
+                        viewPager.setAdapter(viewPagerAdapter);
+                        tabbar.setupWithViewPager(viewPager);
+
+                        Toast.makeText(MainActivity.this, "your data is refreshed", Toast.LENGTH_SHORT).show();
+
+                        pulltorefresh.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
+
     }
 
     @Override
