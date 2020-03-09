@@ -9,10 +9,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.test.Model.CartModal;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Deepak Nishad on 26-Jul-16.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
+    ArrayList<CartModal> cartModalArrayList = new ArrayList<>();
 
     private static final String TAG = DatabaseHelper.class.getSimpleName();
 
@@ -34,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private static final String RC_DETAILS_TABLE_QUERY = "create table " + RC_DETAILS_TABLE + " ( " + ID + " integer primary key autoincrement, "
-            + product_id + " text NOT NULL unique, " + product_name + " text, " + product_dec + " text, "+ product_Food_image+ " text, "+product_PRICE+ " text, "+product_Quantity+ " text);";
+            + product_id + " text NOT NULL unique, " + product_name + " text, " + product_dec + " text, "+ product_Food_image+ " BLOB, "+product_PRICE+ " text, "+product_Quantity+ " text);";
 
 
 
@@ -140,6 +146,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
+    }
+
+
+    public List<CartModal> getdata() {
+        try {
+            SQLiteDatabase database = getWritableDatabase();
+            Cursor cursor = database.rawQuery("select * from " + RC_DETAILS_TABLE, null);
+
+            if (cursor != null) {
+
+                cursor.moveToFirst();
+
+                do {
+                    CartModal cartModal = new CartModal();
+                    cartModal.setCart_item_id(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.product_id)));
+                    cartModal.setCart_item_name(cursor.getString(cursor.getColumnIndex(DatabaseHelper.product_name)));
+                    cartModal.setQuantity(Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.product_Quantity))));
+                    cartModal.setCart_item_price(Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.product_PRICE))));
+                    //cartModal.setCart_item_img_url(cursor.getString(cursor.getColumnIndex(DatabaseHelper.product_Food_image)));
+                    cartModalArrayList.add(cartModal);
+                } while (cursor.moveToNext());
+            }
+
+            System.out.println("cart modal array list "+ cartModalArrayList);
+            database.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return cartModalArrayList;
     }
 
 

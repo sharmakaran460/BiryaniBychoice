@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SwipeRefreshLayout pulltorefresh;
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
-    final String url="http://122.160.81.156:8081/biryaniweb/food";
+    final String url="http://61.247.229.49:8082/biryaniwebs/food";
 
 
     Location loc;
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         viewPager.setAdapter(viewPagerAdapter);
                         tabbar.setupWithViewPager(viewPager);
 
-                        Toast.makeText(MainActivity.this, "your data is refreshed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
 
                         pulltorefresh.setRefreshing(false);
                     }

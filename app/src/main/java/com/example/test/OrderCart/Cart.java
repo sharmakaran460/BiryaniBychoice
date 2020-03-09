@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.test.Model.CartModal;
 import com.example.test.R;
 import com.example.test.Sqldirectory.CartLitedb;
+import com.example.test.Sqldirectory.DatabaseHelper;
 import com.example.test.ViewHolder.Cart_layoutAdapter;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Cart extends AppCompatActivity {
     Toolbar toolbar;
     Button placeorder;
     RelativeLayout relativeLayout;
-    TextView remove_donation;
+    TextView remove_donation , item_total;
 
 
     @Override
@@ -45,6 +46,7 @@ public class Cart extends AppCompatActivity {
         placeorder = findViewById(R.id.placeorder);
         relativeLayout=findViewById(R.id.donation_layout_id);
         remove_donation=findViewById(R.id.remove_donation);
+        item_total =findViewById(R.id.items_total);
 
         remove_donation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +57,7 @@ public class Cart extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
-//for toolbar setup
+        //for toolbar setup
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,23 +66,18 @@ public class Cart extends AppCompatActivity {
                 finish();
             }
         });
-//database inherited
-        CartLitedb cartLitedb = new CartLitedb(getApplicationContext());
-//for recyclerview
+        //database inherited
+       DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+            //for recyclerview
         RecyclerView recyclerView = findViewById(R.id.cartview);
 
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        System.out.println("ye hai data....."+cartModalArrayList);
+        System.out.println("Data base heler in cart "+cartModalArrayList);
 
-        recyclerView.setAdapter(new Cart_layoutAdapter((ArrayList<CartModal>) cartLitedb.getdata()) );
-
-
-
-
-
+        recyclerView.setAdapter(new Cart_layoutAdapter((ArrayList<CartModal>) databaseHelper.getdata(),item_total));
 
 
 
@@ -91,7 +88,6 @@ public class Cart extends AppCompatActivity {
                 Toast.makeText(Cart.this, "place orderbutton clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
     }

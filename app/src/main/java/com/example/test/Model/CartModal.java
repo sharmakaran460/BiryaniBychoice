@@ -99,9 +99,9 @@ public class CartModal {
     }
 
     public void setCart_item_img_url(String cart_item_img_url) {
-        //String imageData[] = cart_item_img_url.split(",");
+        String imageData[] = cart_item_img_url.split(",");
 
-        //cart_item_img_url = imageData[1];
+        cart_item_img_url = imageData[1];
         this.cart_item_img_url = cart_item_img_url;
         setImage(Base64.decode(cart_item_img_url,Base64.DEFAULT));
 

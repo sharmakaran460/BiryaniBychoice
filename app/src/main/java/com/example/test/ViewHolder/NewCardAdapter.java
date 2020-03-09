@@ -131,25 +131,27 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
-//                quintity[0] =  quintity[0]+1;
-//                holder.counter_text.setText(String.valueOf(quintity[0]));
-//                final long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
-//                if(result>0)
-//                {
-//                    String amount =  data_base.get_the_total_amount();
-//                    String quantity = data_base. get_the_total_quantity();
-//                    cart_amout.setText("₹"+amount);
-//                    if(quantity!=null)
-//                    {
-//                        items_total.setText(""+quantity+" Item");
-//                    }
-//                    Log.e("Result_amount",amount+"");
-//                }
+/*
+                quintity[0] =  quintity[0]+1;
+                holder.counter_text.setText(String.valueOf(quintity[0]));
+                final long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
+                if(result>0)
+                {
+                    String amount =  data_base.get_the_total_amount();
+                    String quantity = data_base. get_the_total_quantity();
+                   cart_amout.setText("₹"+amount);
+                    if(quantity!=null)
+                    {
+                        items_total.setText(""+quantity+" Item");
+                    }
+                    Log.e("Result_amount",amount+"");
+                }
 
 
-//                bottom_sheet_layout.setVisibility(View.VISIBLE);
-//                            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
-//                            holder.linearLayout.setVisibility(View.VISIBLE);
+                bottom_sheet_layout.setVisibility(View.VISIBLE);
+                            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
+                            holder.linearLayout.setVisibility(View.VISIBLE);
+*/
 
 
 
@@ -166,7 +168,7 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
                         quintity[0]=quintity[0]+1;
                         holder.counter_text.setText(String.valueOf(quintity[0]));
                         long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),
-                                food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",
+                                food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),food_list.get(position).getFood_imag_url(),
                                 String.valueOf(food_list.get(position).getFoodPrice()),String.valueOf(quintity[0]));
 
 

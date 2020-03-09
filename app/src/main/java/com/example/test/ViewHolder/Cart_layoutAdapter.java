@@ -28,11 +28,13 @@ import java.util.ArrayList;
 public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.CartViewHolder> {
     View view;
  ArrayList<CartModal> cartModalArrayList;
+ TextView items_total;
 
 
 
-    public Cart_layoutAdapter(ArrayList<CartModal> cartModalArrayList) {
+    public Cart_layoutAdapter(ArrayList<CartModal> cartModalArrayList, TextView items_total) {
         this.cartModalArrayList = cartModalArrayList;
+        this.items_total = items_total;
     }
 
     @NonNull
@@ -67,11 +69,9 @@ public class Cart_layoutAdapter extends RecyclerView.Adapter<Cart_layoutAdapter.
 
         holder.itemPrice.setText(String.valueOf(cartModalArrayList.get(position).getCart_item_price())+" \u20B9");
 
-
-
         //new DownlordImage(holder.itemimg).execute(cartModalArrayList.get(position).getCart_item_img_url());
         System.out.println("here is cart"+cartModalArrayList);
-
+        ///items_total.setText(cartModalArrayList.get(position).getCart_item_price());
 
         holder.btn_minus.setOnClickListener(new View.OnClickListener() {
             @Override
