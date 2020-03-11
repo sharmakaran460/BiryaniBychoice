@@ -127,7 +127,7 @@ public Tab2(ArrayList<FoodModel> foodModels){
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodModels,getContext(),cart_amout,items_total,bottomsheet,
                 add_new_serv_layout,add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,
-                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn,recyclerView));
    return view;
     }
     @Override

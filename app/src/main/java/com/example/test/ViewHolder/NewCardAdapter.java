@@ -43,6 +43,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
     RadioButton btn1,btn2,btn3;
     RelativeLayout add_new_serv_layout;
     Button add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn;
+    RecyclerView recyclerView;
     ArrayList<CartModal> cartModalArrayList=new ArrayList<>();
 
 
@@ -50,7 +51,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
                           TextView cart_amout, TextView items_total,
                           LinearLayout bottom_sheet_layout, RelativeLayout add_new_serv_layout,
                           Button add_new_serv_btn, Button repeat_last_serv_btn, Button close_new_serv_layout_btn,
-                          TextView add_new_serv_name,TextView add_new_serving_size, TextView bottom_sheet_view_cart_btn) {
+                          TextView add_new_serv_name,TextView add_new_serving_size, TextView bottom_sheet_view_cart_btn,RecyclerView recyclerView) {
         this.food_list = food_list;
         this.context = context;
         this.cart_amout = cart_amout;
@@ -64,6 +65,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.add_new_serv_name=add_new_serv_name;
         this.add_new_serving_size=add_new_serving_size;
         this.bottom_sheet_view_cart_btn=bottom_sheet_view_cart_btn;
+        this.recyclerView=recyclerView;
 
 
     }
@@ -109,6 +111,9 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         holder.food_desc.setText(food_list.get(position).getFoodDes());
         quintity[0] = food_list.get(position).getQuantity();
 
+   
+
+
 
 bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -131,27 +136,7 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
-/*
-                quintity[0] =  quintity[0]+1;
-                holder.counter_text.setText(String.valueOf(quintity[0]));
-                final long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),  food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),"image",String.valueOf(food_list.get(position).getFoodPrice()),Integer.toString(quintity[0]));
-                if(result>0)
-                {
-                    String amount =  data_base.get_the_total_amount();
-                    String quantity = data_base. get_the_total_quantity();
-                   cart_amout.setText("₹"+amount);
-                    if(quantity!=null)
-                    {
-                        items_total.setText(""+quantity+" Item");
-                    }
-                    Log.e("Result_amount",amount+"");
-                }
 
-
-                bottom_sheet_layout.setVisibility(View.VISIBLE);
-                            holder.linearLayout_btn.setVisibility(View.INVISIBLE);
-                            holder.linearLayout.setVisibility(View.VISIBLE);
-*/
 
 
 
@@ -184,6 +169,8 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
 
                         }
                             bottom_sheet_layout.setVisibility(View.VISIBLE);
+                        recyclerView.setPadding(0,0,0,120);
+
                             holder.linearLayout_btn.setVisibility(View.INVISIBLE);
                             holder.linearLayout.setVisibility(View.VISIBLE);
 
@@ -297,7 +284,8 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
                     holder.add_btn.setVisibility(View.VISIBLE);
                     holder.linearLayout_btn.setVisibility(View.VISIBLE);
                     holder.linearLayout.setVisibility(View.INVISIBLE);
-                    //bottom_sheet_layout.setVisibility(View.INVISIBLE);
+                    bottom_sheet_layout.setVisibility(View.INVISIBLE);
+                    recyclerView.setPadding(0,0,0,0);
 
                 }
 

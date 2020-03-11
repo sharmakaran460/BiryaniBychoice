@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".FlashScreen">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Biryani By Choice"
-        android:textSize="30sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:id="@+id/text"
-        />
+        android:scaleType="centerInside"
+        android:src="@drawable/finallogo"/>
+
 </RelativeLayout>

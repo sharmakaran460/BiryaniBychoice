@@ -65,6 +65,7 @@ public class Tab1 extends Fragment {
     GetData getData=new GetData();
     RelativeLayout add_new_serv_layout;
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
+    RecyclerView recyclerView;
 
 
 
@@ -105,12 +106,13 @@ public class Tab1 extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-        RecyclerView recyclerView= view.findViewById(R.id.layout);
-        recyclerView.hasFixedSize();
+       recyclerView= view.findViewById(R.id.layout);
+
+       // recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout,
                 add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,
-                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn, recyclerView));
 
         return view;
 

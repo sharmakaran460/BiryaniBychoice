@@ -62,6 +62,7 @@ public class BlankFragment extends Fragment {
     GetData getData=new GetData();
     RelativeLayout add_new_srv_layout;
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
+    RecyclerView recyclerView;
 
     public BlankFragment() {
         // Required empty public constructor
@@ -104,13 +105,13 @@ public class BlankFragment extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-        RecyclerView recyclerView= view.findViewById(R.id.comborecycler);
+      recyclerView= view.findViewById(R.id.comborecycler);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
         recyclerView.setAdapter(new NewCardAdapter(combolist,getContext(),cart_amout,items_total,bottomsheet,
                 add_new_srv_layout,add_new_serv_btn,repeat_last_serv_btn,close_new_serv_layout_btn,
-                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn,recyclerView));
 
 
         return view;

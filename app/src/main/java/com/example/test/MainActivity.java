@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SwipeRefreshLayout pulltorefresh;
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
-    final String url="http://61.247.229.49:8082/biryaniwebs/food";
+    final String url="http://122.160.81.156:8081/biryaniweb/food";
 
 
     Location loc;
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-//need to be change--->
+            //need to be change--->
                 requestPerm();
 
 

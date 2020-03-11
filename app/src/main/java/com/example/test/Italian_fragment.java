@@ -29,7 +29,7 @@ public class Italian_fragment extends Fragment {
     View view;
     ArrayList<FoodModel> foodlists=new ArrayList<>();
     TextView cart_amout,items_total, add_new_serv_name,add_new_serving_size,bottom_sheet_view_cart_btn;
-
+    RecyclerView recyclerView;
     DatabaseHelper data_base;
     LinearLayout bottom_sheet_layout;
     GetData getData=new GetData();
@@ -74,12 +74,12 @@ public class Italian_fragment extends Fragment {
             items_total.setText(""+quantity+" Item");
         }
 
-        RecyclerView recyclerView= view.findViewById(R.id.Italian_layout);
+        recyclerView= view.findViewById(R.id.Italian_layout);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
         recyclerView.setAdapter(new NewCardAdapter(foodlists,getContext(),cart_amout,items_total,bottom_sheet_layout,
                 add_new_serv_layout, add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn,
-                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn));
+                add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn,recyclerView));
         return view;
     }
 }
