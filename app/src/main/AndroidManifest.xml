@@ -15,14 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBXsDpHSlOjNSxjClID0n3KkRSzpdhbOjU"
-            />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/map_key"/>
         <activity android:name=".ManageAddresses.ManageAddresses"></activity>
         <activity android:name=".OrderCart.Myorders" />
         <activity android:name=".Customer_Profile" />
         <activity android:name=".Signup" />
         <activity android:name=".Login" />
+
         <activity android:name=".OrderCart.Cart" />
         <activity android:name=".Contactus" />
         <activity android:name=".AboutUs" />

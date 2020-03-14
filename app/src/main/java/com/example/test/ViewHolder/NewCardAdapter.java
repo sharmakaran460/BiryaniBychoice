@@ -2,6 +2,7 @@ package com.example.test.ViewHolder;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,17 +24,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.test.Model.CartModal;
 import com.example.test.Model.FoodModel;
+import com.example.test.OrderCart.Cart;
 import com.example.test.R;
 import com.example.test.Sqldirectory.DatabaseHelper;
+import com.example.test.Sqldirectory.MyDatabse;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHolder> {
     View view;
     ArrayList<FoodModel> food_list;
     DatabaseHelper data_base;
+    MyDatabse myDatabse;
     Context context;
     TextView cart_amout,items_total ,firstprice,secondprice,thirdprice, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
     LinearLayout bottom_sheet_layout;
@@ -57,6 +62,7 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
         this.cart_amout = cart_amout;
         this.items_total = items_total;
         this.bottom_sheet_layout = bottom_sheet_layout;
+        myDatabse=new MyDatabse(context);
         data_base = new DatabaseHelper(context);
         this.add_new_serv_layout=add_new_serv_layout;
         this.add_new_serv_btn=add_new_serv_btn;
@@ -118,6 +124,8 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent(view.getContext(), Cart.class);
+        context.startActivity(intent);
 
 
     }
@@ -152,6 +160,7 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
 
                         quintity[0]=quintity[0]+1;
                         holder.counter_text.setText(String.valueOf(quintity[0]));
+
                         long result = data_base.save_cart_value(String.valueOf(food_list.get(position).getFoodid()),
                                 food_list.get(position).getFoodName(),food_list.get(position).getFoodDes(),food_list.get(position).getFood_imag_url(),
                                 String.valueOf(food_list.get(position).getFoodPrice()),String.valueOf(quintity[0]));
@@ -169,7 +178,7 @@ bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
 
                         }
                             bottom_sheet_layout.setVisibility(View.VISIBLE);
-                        recyclerView.setPadding(0,0,0,120);
+                            recyclerView.setPadding(0,0,0,120);
 
                             holder.linearLayout_btn.setVisibility(View.INVISIBLE);
                             holder.linearLayout.setVisibility(View.VISIBLE);

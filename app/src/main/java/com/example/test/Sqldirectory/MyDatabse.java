@@ -121,40 +121,40 @@ public class MyDatabse extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> get_table_data()
-    {
-        ArrayList<String> alldata=new ArrayList<>();
-        int cart_id=0;
-        int food_id=0;
-        String food_name="";
-        int food_price=0;
-        int food_quantity=0;
-        int food_amount=0;
-        String time="";
-        String type="";
-        SQLiteDatabase database=this.getReadableDatabase();
-        String query="SELECT * FROM "+Cart_table_name;
+    public ArrayList<String> get_table_data() {
+        ArrayList<String> alldata = new ArrayList<>();
+        int cart_id = 0;
+        int food_id = 0;
+        String food_name = "";
+        int food_price = 0;
+        int food_quantity = 0;
+        int food_amount = 0;
+        String time = "";
+        String type = "";
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + Cart_table_name;
 
-        Cursor cursor=database.rawQuery(query,new String[]{});
-        if(cursor!=null)
-        {
+        Cursor cursor = database.rawQuery(query, new String[]{});
+        if (cursor != null) {
             cursor.moveToFirst();
+
+            do {
+                String data;
+                cart_id = cursor.getInt(0);
+                food_id = cursor.getInt(1);
+                food_name = cursor.getString(2);
+                food_price = cursor.getInt(3);
+                food_quantity = cursor.getInt(4);
+                food_amount = cursor.getInt(5);
+                time = cursor.getString(6);
+                type = cursor.getString(7);
+                data = cart_id + " " + food_id + " " + food_name + " " + food_price + " " + food_quantity + " " + food_amount + " " + time + " " + type;
+                alldata.add(data);
+
+            } while (cursor.moveToNext());
+
+
         }
-        do{
-           String data;
-            cart_id=cursor.getInt(0);
-             food_id=cursor.getInt(1);
-            food_name=cursor.getString(2);
-             food_price=cursor.getInt(3);
-             food_quantity=cursor.getInt(4);
-             food_amount=cursor.getInt(5);
-             time=cursor.getString(6);
-             type=cursor.getString(7);
-             data=cart_id+" "+food_id+" "+food_name+" "+food_price+ " " +food_quantity+" "+food_amount+" "+time+" "+type;
-             alldata.add(data);
-
-        }while (cursor.moveToNext());
-
         return alldata;
     }
 

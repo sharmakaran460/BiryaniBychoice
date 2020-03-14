@@ -323,6 +323,11 @@ public void getaddress(){
                 Intent intent1 = new Intent(this,Customer_Profile.class);
                 onBackPressed();
                 startActivity(intent1);
+                break;
+            case R.id.address_book:
+                Intent i3 = new Intent(this,ManageAddresses.class);
+                onBackPressed();
+                startActivity(i3);
 
         }
         return true;
