@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
             style="@style/TextAppearance.MaterialComponents.Body1"
-            android:hint="password"
+            android:hint="OTP"
             android:drawableRight="@drawable/ic_lock_black_24dp"/>
         <Button
             android:layout_width="wrap_content"
@@ -42,16 +42,10 @@
             android:layout_margin="5sp"
             android:fontFamily="@font/raleway_bold"
             android:layout_gravity="center"
-            android:text="Login"
+            android:text="Login/Signup"
+            android:padding="10sp"
             android:background="@drawable/btn_background"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New customer? Rigestration"
-            android:textStyle="italic"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="10sp"
-            style="@style/TextAppearance.MaterialComponents.Body1"/>
+
     </LinearLayout>
 
 

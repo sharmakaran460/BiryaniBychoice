@@ -347,7 +347,12 @@ public void getaddress(){
                 Intent i3 = new Intent(this,ManageAddresses.class);
                 onBackPressed();
                 startActivity(i3);
-
+                break;
+            case R.id.loginbtn:
+                Intent i4 = new Intent(this,Login.class);
+                onBackPressed();
+                startActivity(i4);
+                break;
         }
         return true;
     }
