@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
                     login_btn.setVisibility(View.VISIBLE);
                 }
                 else {
-                    Toast.makeText(Login.this, "Enter Valid Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Please Enter Valid 10 Digit Mobile Number", Toast.LENGTH_SHORT).show();
                 }
 
 
