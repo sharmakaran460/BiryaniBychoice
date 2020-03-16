@@ -17,7 +17,6 @@
         android:id="@+id/drawer"
         >
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -96,10 +95,11 @@
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#f9e79f"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:background="@color/colorPrimaryDark"
             app:elevation="4sp"
-            app:itemTextColor="@color/toolbarColor"
-            app:itemIconTint="@color/colorPrimaryDark"
+            app:itemTextColor="@color/colorPrimary"
+            app:itemIconTint="@color/colorPrimary"
             app:headerLayout="@layout/header"
             app:itemIconSize="28sp"
             app:itemTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
