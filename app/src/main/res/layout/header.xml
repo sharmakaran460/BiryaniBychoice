@@ -10,12 +10,14 @@
         android:layout_width="100sp"
         android:layout_height="100sp"
         android:elevation="12sp"
+
         app:cardCornerRadius="40sp"
         android:id="@+id/cardprofile"
         android:layout_margin="5sp">
         <ImageView
             android:layout_width="100sp"
             android:layout_height="100sp"
+            android:id="@+id/profileimage"
             android:scaleType="centerCrop"
             android:background="@drawable/family"/>
 

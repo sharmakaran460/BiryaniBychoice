@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
 
     TextView cart_amount,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
+
+    TextView username;
+    ImageView user_image;
     LinearLayout bottomsheet;
     SwipeRefreshLayout pulltorefresh;
     RelativeLayout add_new_serving_layout;
@@ -141,8 +145,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager = findViewById(R.id.view_pager);
 
         //calling navigation view for the click listners
+
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        username=header.findViewById(R.id.header_title);
+        user_image=header.findViewById(R.id.profileimage);
+
+        user_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Customer_Profile.class));
+            }
+        });
+
+
+
         mShimmerViewContainer.startShimmerAnimation();
 
 
