@@ -1,8 +1,10 @@
 package com.example.test.BAckgrounddata;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +37,59 @@ public class GetData {
     public ArrayList<FoodModel> getFoodModels() {
 
           return foodlistAll;
+    }
+
+    public void getsingledata(String url, Context context,final CallBackOne callBackOne)
+    {
+        final FoodModel foodItem = new FoodModel();
+        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try
+                {
+                    JSONObject object =new JSONObject(response);
+
+                    System.out.println("in try catch............................");
+                   // JSONArray array = new JSONArray(response);
+
+
+                       // JSONObject object = array.getJSONObject(i);
+
+                        foodItem.setFoodName(object.getString("food_name"));
+                        foodItem.setFoodid(object.getInt("food_id"));
+                        foodItem.setFoodCat(object.getString("food_cat"));
+                        foodItem.setFoodDes(object.getString("food_desc"));
+                        foodItem.setFoodPrice(object.getInt("food_price"));
+                        foodItem.setMedium_serving_price(object.getInt("medium_serving_price"));
+                        foodItem.setLarge_serving_price(object.getInt("large_serving_price"));
+                        foodItem.setFood_imag_url(object.getString("food_image_blob"));
+
+
+
+
+
+
+
+
+                    System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+foodItem.getFoodName());
+
+
+                    callBackOne.onSuccess(foodItem);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(request);
     }
 
 
@@ -137,6 +192,9 @@ public class GetData {
  // public void getAlldata()
   public interface CallBack{
       void onSuccess(ArrayList<FoodModel> foodModelsAll,ArrayList<FoodModel> foodModelsveg,ArrayList<FoodModel> foodModelsegnon, ArrayList<FoodModel> foodlistnorthindian);
+  }
+  public interface CallBackOne{
+      void onSuccess(FoodModel foodModel);
   }
 
 }

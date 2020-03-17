@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.test.Itemdetails.ItemsDetails;
 import com.example.test.Model.CartModal;
 import com.example.test.Model.FoodModel;
 import com.example.test.OrderCart.Cart;
@@ -119,7 +120,16 @@ public class NewCardAdapter extends RecyclerView.Adapter<NewCardAdapter.ViewHold
 
 
 
+holder.imageView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+
+        Intent i = new Intent(context,ItemsDetails.class);
+         i.putExtra("foodid",food_list.get(position).getFoodid());
+        context.startActivity(i);
+    }
+});
 
 bottom_sheet_view_cart_btn.setOnClickListener(new View.OnClickListener() {
     @Override
