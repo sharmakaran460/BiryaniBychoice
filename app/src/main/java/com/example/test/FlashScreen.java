@@ -45,7 +45,7 @@ String url ="http://61.247.229.49:8082/biryaniweb/food";
                 startActivity(new Intent(FlashScreen.this,MainActivity.class));
                 finish();
             }
-        },3000);
+        },1500);
 
 
     }

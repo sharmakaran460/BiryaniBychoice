@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,8 +24,10 @@ import android.location.Location;
 
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 
 
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText locText;
     private ImageButton manageAddress;
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
+    Menu menu;
 
     TextView cart_amount,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
 
@@ -89,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         pulltorefresh = findViewById(R.id.pulltorefresh);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
