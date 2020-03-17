@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText locText;
     private ImageButton manageAddress;
     Button add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn;
-    Menu menu;
+
 
     TextView cart_amount,items_total, add_new_serv_name,add_new_serving_size, bottom_sheet_view_cart_btn;
 
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RelativeLayout add_new_serving_layout;
     ArrayList<FoodModel> foodModels;
     final String url="http://122.160.81.156:8081/biryaniweb/food";
+    final String newurl="http://192.168.1.60:8080/foods";
 
 
     Location loc;
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mShimmerViewContainer.stopShimmerAnimation();
                     mShimmerViewContainer.setVisibility(View.GONE);
                 //For Tab view this View pager can be used
+
                 ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
                 viewPagerAdapter.addfragment(new Tab1(foodModelsAll,cart_amount,items_total,bottomsheet,add_new_serving_layout,
                         add_new_serv_btn,repeat_last_serv_btn, close_new_serv_layout_btn, add_new_serv_name,add_new_serving_size,
@@ -368,8 +370,8 @@ public void getaddress(){
 
         getMenuInflater().inflate(R.menu.cart,menu);
         return true;
-
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
