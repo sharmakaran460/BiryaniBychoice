@@ -46,6 +46,8 @@
                 android:drawablePadding="2sp"
                 android:hint="Your location"
                 android:id="@+id/locationText"/>
+
+
             </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.tabs.TabLayout
