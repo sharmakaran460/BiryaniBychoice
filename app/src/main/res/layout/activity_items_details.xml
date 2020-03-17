@@ -9,11 +9,11 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Widget.AppCompat.Toolbar"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/toolbar"
         app:title="Food Title"
-        app:titleTextColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary"/>
+        app:titleTextColor="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"/>
 
     <ImageView
         android:layout_below="@+id/toolbar"
@@ -25,54 +25,80 @@
         android:layout_margin="1.5sp"
         android:id="@+id/food_image"/>
     <LinearLayout
-        android:layout_width="250sp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/food_image"
-        android:orientation="vertical"
-        android:id="@+id/firstlinear">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Food Title"
-            android:id="@+id/food_title"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_margin="10sp"/>
-        <TextView
-            android:layout_width="250sp"
-            android:layout_height="wrap_content"
-            android:hint=" ' Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        android:orientation="horizontal"
+        android:layout_below="@+id/food_image">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:layout_below="@+id/food_image"
+            android:orientation="vertical"
+            android:id="@+id/firstlinear">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Food Title"
+                android:id="@+id/food_title"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_margin="10sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=" ' Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
             nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
             aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat
             non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ' "
-            android:layout_margin="5sp"
-            android:id="@+id/food_desc"
-            android:inputType="textMultiLine"
+                android:layout_margin="5sp"
+                android:id="@+id/food_desc"
+                android:inputType="textMultiLine"
 
-            style="@style/TextAppearance.MaterialComponents.Body2"/>
+                style="@style/TextAppearance.MaterialComponents.Body2"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.70"
+            android:layout_below="@id/food_image"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/firstlinear">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="10sp"
+        android:text="₹ "
+        style="@style/TextAppearance.MaterialComponents.Body1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="10sp"
+        android:id="@+id/food_price"
+        android:hint="500"
+        style="@style/TextAppearance.MaterialComponents.Body1"/>
+
+
+</LinearLayout>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/food_image"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/firstlinear">
-
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textAlignment="center"
-           android:layout_margin="10sp"
-           android:id="@+id/food_price"
-           android:background="@drawable/loginbackground"
-           android:hint="500 ₹"
-           style="@style/TextAppearance.MaterialComponents.Body1"
-           android:padding="20sp"/>
 
 
-    </LinearLayout>
 
 </RelativeLayout>
